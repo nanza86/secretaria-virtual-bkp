@@ -19,11 +19,7 @@ export const theme = extendTheme({
   styles: {
     global: {
       body: {
-        bg: 'rgb(250, 246, 245)',
-        bgImage: 'url(/images/background.png)',
-        bgRepeat: 'no-repeat',
-        bgPosition: 'top right',
-        bgAttachment: 'fixed',
+        bg: 'gray.50',
         color: 'gray.700'
       }
     }
