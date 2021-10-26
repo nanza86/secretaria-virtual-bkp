@@ -4,7 +4,7 @@ import Head from "next/head";
 import { MainMenu } from "../src/layout/sidebar/accordion-menu";
 import { Logo } from "../src/components/utils/logo";
 import { Dashboard } from "../src/layout/content/dashboard";
-import { Searchbox } from "../src/layout/sidebar/searchbox";
+import { Searchbox } from "../src/components/utils/searchbox";
 
 const Home: NextPage = () => {
   return (

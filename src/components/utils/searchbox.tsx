@@ -6,7 +6,7 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 import { RiSearchLine } from "react-icons/ri";
-import IconBox from "../../components/utils/iconBox";
+import IconBox from "./iconBox";
 
 export const Searchbox = () => {
   return (
@@ -25,7 +25,7 @@ export const Searchbox = () => {
           </Button>
         </InputRightElement>{" "}
         <Input
-          type="tel"
+          type="text"
           placeholder="Pesquisar"
           bgColor="white"
           borderRadius="xl"

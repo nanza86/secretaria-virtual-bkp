@@ -3,7 +3,7 @@ import { Breadcrumbs } from "../../components/utils/breadcrumb";
 import { RiMenuLine } from "react-icons/ri";
 import IconBox from "../../components/utils/iconBox";
 import { AvatarAccount } from "../../components/utils/avatar";
-import { Searchbox } from "../sidebar/searchbox";
+import { Searchbox } from "../../components/utils/searchbox";
 import { MobileMenu } from "../../components/utils/mobile-menu";
 
 const Card = (props: any) => {
