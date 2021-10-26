@@ -26,6 +26,7 @@ export const AvatarAccount = () => {
         boxShadow="lg"
         ref={btnRef}
         onClick={onOpen}
+        cursor="pointer"
       />
       <Drawer
         isOpen={isOpen}
