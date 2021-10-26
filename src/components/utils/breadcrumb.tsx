@@ -12,7 +12,7 @@ export const Breadcrumbs = () => {
       <Text
         fontSize="sm"
         fontWeight="bold"
-        color="gray.700"
+        color="gray.600"
         me="2"
         display={["none", "flex"]}
       >
@@ -23,7 +23,7 @@ export const Breadcrumbs = () => {
         separator={">"}
         fontSize="sm"
         fontWeight="bold"
-        color="gray.700"
+        color="gray.600"
       >
         <BreadcrumbItem>
           <BreadcrumbLink href="#">Início</BreadcrumbLink>
