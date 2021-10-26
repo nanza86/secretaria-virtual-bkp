@@ -10,7 +10,7 @@ import IconBox from "../../components/utils/iconBox";
 
 export const Searchbox = () => {
   return (
-    <HStack alignItems="center" pb="5" w="full">
+    <HStack alignItems="center" w="full">
       <InputGroup>
         <InputRightElement>
           <Button

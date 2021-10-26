@@ -1,6 +1,6 @@
 import { HStack, VStack, Heading, Text } from "@chakra-ui/react";
 import { RiHomeSmileLine } from "react-icons/ri";
-import IconBox from "../../components/utils/iconBox";
+import IconBox from "./iconBox";
 
 export const Logo = () => {
   return (
@@ -9,7 +9,7 @@ export const Logo = () => {
         <RiHomeSmileLine size="30" />
       </IconBox>
       <VStack alignItems="flex-start">
-        <Heading m="0" p="0" fontSize="md" fontWeight="800" color="gray">
+        <Heading m="0" p="0" fontSize="md" fontWeight="800" color="gray" flexWrap="nowrap" whiteSpace="nowrap">
           Secretaria Virtual
         </Heading>
         <Text mt="-4px !important" p="0" fontSize="0.9em" color="gray.400">Flor de Jagube</Text>
