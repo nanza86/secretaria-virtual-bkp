@@ -55,7 +55,8 @@ export const Dashboard = () => {
               <Heading
                 fontWeight={["bold", "thin"]}
                 fontSize={["1.8em", "50"]}
-                color="gray.500"
+                color="gray.600"
+                textShadow="2px 2px 2px white"
               >
                 Dashboard
               </Heading>
