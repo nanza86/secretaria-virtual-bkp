@@ -2,6 +2,7 @@ import {
   Flex,
   Button,
   Heading,
+  Divider,
   Drawer,
   DrawerBody,
   DrawerFooter,
@@ -19,7 +20,7 @@ import { Searchbox } from "../../layout/sidebar/searchbox";
 
 export const MobileMenu = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = React.useRef<HTMLButtonElement>(null);
+  const btnRef = React.useRef<HTMLButtonElement>(null)
   return (
     <>
       <Flex>
@@ -28,7 +29,11 @@ export const MobileMenu = () => {
           <RiMenuLine />
         </Button>
       </Flex>
-      <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
+      <Drawer
+        isOpen={isOpen}
+        placement="right"
+        onClose={onClose}
+      >
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
