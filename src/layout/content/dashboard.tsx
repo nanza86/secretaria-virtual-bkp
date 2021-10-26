@@ -3,7 +3,7 @@ import { Breadcrumbs } from "../../components/utils/breadcrumb";
 import { RiToolsFill } from "react-icons/ri";
 import IconBox from "../../components/utils/iconBox";
 
-const Card = (props) => {
+const Card = (props: any) => {
   return (
     <Box p={5} shadow="base" flex="1" borderRadius="md" bgColor="white">
       <Heading fontSize="md" color="gray.300">
