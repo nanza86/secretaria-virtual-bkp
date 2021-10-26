@@ -20,7 +20,7 @@ import { Searchbox } from "../../layout/sidebar/searchbox";
 
 export const MobileMenu = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = React.useRef();
+  const btnRef = React.useRef<HTMLHeadingElement>(null)
   return (
     <>
       <Flex>
