@@ -15,7 +15,7 @@ import React from "react";
 
 export const AvatarAccount = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = React.useRef<HTMLHeadingElement>(null)
+  const btnRef = React.useRef<HTMLButtonElement>(null)
   return (
     <Flex alignItems="center">
       <Avatar
