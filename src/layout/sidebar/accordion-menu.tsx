@@ -22,7 +22,7 @@ export const MainMenu = () => {
   return (
     <Accordion allowToggle w="full">
       {/** Manutenções */}
-      <AccordionItem border="none" pb="1">
+      <AccordionItem border="none" pb="2">
         <AccordionButton
           p="2"
           borderRadius="xl"
@@ -36,7 +36,7 @@ export const MainMenu = () => {
               <RiToolsFill size="20" />
             </IconBox>
             <Text my="auto" fontSize="sm">
-              Manutenções
+              Zeladoria
             </Text>
             <AccordionIcon />
           </Flex>
@@ -82,7 +82,7 @@ export const MainMenu = () => {
       </AccordionItem>
 
       {/** Pessoas */}
-      <AccordionItem border="none" pb="1">
+      <AccordionItem border="none" pb="2">
         <AccordionButton
           p="2"
           borderRadius="xl"

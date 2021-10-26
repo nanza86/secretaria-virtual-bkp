@@ -2,6 +2,9 @@ import type { NextPage } from "next";
 import { HStack, VStack, Box, Heading } from "@chakra-ui/react";
 import Head from "next/head";
 import { MainMenu } from "../src/layout/sidebar/accordion-menu";
+import { Logo } from "../src/layout/sidebar/logo";
+import { Dashboard } from "../src/layout/content/dashboard";
+import { Searchbox } from "../src/layout/sidebar/searchbox";
 
 const Home: NextPage = () => {
   return (
@@ -12,20 +15,16 @@ const Home: NextPage = () => {
       </Head>
       <HStack w="full" spacing="0" alignItems="flex-start">
         {/** Sidebar */}
-        <VStack w="20em" h="100vh" p="10">
-          <VStack alignItems="flex-start">
-            <Heading fontSize="md" fontWeight="bold">Secretaria Virtual</Heading>
-            <Heading fontSize="sm" fontWeight="normal" pb="2">Flor de Jagube</Heading>
-          </VStack>
+        <VStack w="18em" h="100vh" p="10" flexShrink={0}>
+          <Logo/>
+          <Searchbox/>
           <HStack w="full">
             <MainMenu />
           </HStack>
         </VStack>
         {/** Main Content */}
-        <VStack w="full" h="100vh">
-          <HStack>
-            <Box>Main</Box>
-          </HStack>
+        <VStack w="full" h="100vh" alignItems="flex-start" p="10">
+          <Dashboard/>
         </VStack>
       </HStack>
     </>
