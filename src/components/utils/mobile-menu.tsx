@@ -38,14 +38,13 @@ export const MobileMenu = () => {
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader>
-            <Heading as="h3" fontSize="md" mt="5">
+            <Heading as="h3" fontSize="md" mt="5" mb="5">
               Navegue por aqui:
             </Heading>
+            <Searchbox />
           </DrawerHeader>
 
           <DrawerBody>
-            <Searchbox />
-            <Divider py="2"/>
             <MainMenu />
           </DrawerBody>
 
