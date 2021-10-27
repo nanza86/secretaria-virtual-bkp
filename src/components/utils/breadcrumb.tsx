@@ -8,7 +8,7 @@ import {
 
 export const Breadcrumbs = () => {
   return (
-    <Flex flexDir="row" textShadow="1px 1px 2px white">
+    <Flex flexDir="row">
       <Text
         fontSize="sm"
         fontWeight="bold"

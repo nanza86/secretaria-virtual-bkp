@@ -1,7 +1,15 @@
-import { HStack, Heading, Flex, Box } from "@chakra-ui/react";
+import {
+  HStack,
+  Heading,
+  Flex,
+  Box,
+  SimpleGrid,
+  GridItem,
+} from "@chakra-ui/react";
 import { Breadcrumbs } from "../../components/utils/breadcrumb";
 import { RiMenuLine } from "react-icons/ri";
 import IconBox from "../../components/utils/iconBox";
+import { CardAniversariantes, CardTrabalhos } from "./cards";
 import { AvatarAccount } from "../../components/utils/avatar";
 import { Searchbox } from "../../components/utils/searchbox";
 import { MobileMenu } from "../../components/utils/mobile-menu";
@@ -9,7 +17,7 @@ import { MobileMenu } from "../../components/utils/mobile-menu";
 const Card = (props: any) => {
   return (
     <Box p={5} shadow="base" flex="1" borderRadius="md" bgColor="white">
-      <Heading fontSize="md" color="gray.300">
+      <Heading fontSize="md" color="gray.400">
         {props.title}
       </Heading>
       <Flex pt="2">{props.children}</Flex>
@@ -46,7 +54,7 @@ export const Dashboard = () => {
             bgColor="white"
             borderRadius="lg"
           >
-            <MobileMenu/>
+            <MobileMenu />
             <Searchbox />
           </Flex>
           <HStack justifyContent="space-between">
@@ -54,9 +62,8 @@ export const Dashboard = () => {
               <Breadcrumbs />
               <Heading
                 fontWeight={["bold", "thin"]}
-                fontSize={["1.8em", "50"]}
+                fontSize={["1.8em", "2.5em", "3em"]}
                 color="gray.600"
-                textShadow="2px 2px 2px white"
               >
                 Dashboard
               </Heading>
@@ -68,19 +75,40 @@ export const Dashboard = () => {
         </Flex>
       </HStack>
       <HStack px={["5", "0"]} pr={["5", "5"]} w="full">
-        <HStack
-          spacing={5}
-          w="full"
-          alignItems="flex-start"
-          alignContent="flex-start"
-        >
-          <Card title="Mutirões">
-            <h4>Orquidário</h4>
-          </Card>
-          <Card title="Mutirões">
-            <h4>Orquidário</h4>
-          </Card>
-        </HStack>
+        <SimpleGrid gap={5} w="full" columns={{ sm: 1, md: 2, xl: 3 }} gridAutoFlow="row" >
+          <GridItem minH="100%">
+            <CardTrabalhos
+              dados={[
+                { data: "30/10", trabalho: "Concentração" },
+                { data: "02/11", trabalho: "Santa Missa" },
+                { data: "03/11", trabalho: "Finados" },
+                { data: "15/11", trabalho: "Concentração" },
+              ]}
+            />
+          </GridItem>
+          <GridItem minH="100%">
+            <CardAniversariantes
+              dados={[
+                { data: "30/10", nome: "Vinicius", img:"https://bit.ly/ryan-florence" },
+                { data: "02/11", nome: "Vilma", img:"https://bit.ly/kent-c-dodds" },
+                { data: "03/11", nome: "Thaisa", img:"https://bit.ly/sage-adebayo" },
+                { data: "15/11", nome: "Sidarta", img:"https://bit.ly/prosper-baba" },
+              ]}
+            />
+          </GridItem>
+          <GridItem minH="100%">
+            <CardTrabalhos
+              title="Próximos Trabalhos"
+              arrs={[1,2,3,4,5]}
+              dados={[
+                { data: "30/10", trabalho: "Concentração" },
+                { data: "02/11", trabalho: "Santa Missa" },
+                { data: "03/11", trabalho: "Finados" },
+                { data: "15/11", trabalho: "Concentração" },
+              ]}
+            />
+          </GridItem>
+        </SimpleGrid>
       </HStack>
     </>
   );
