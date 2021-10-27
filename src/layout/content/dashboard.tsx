@@ -35,6 +35,7 @@ export const Dashboard = () => {
         w="full"
         alignItems="flex-start"
         mb="5"
+        borderBottomRadius={["2xl","none"]}
       >
         <Flex
           bgGradient="linear(to-r, gray.50 10%, rgba(255,255,255,0) 100%)"
