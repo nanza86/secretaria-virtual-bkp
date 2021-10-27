@@ -75,8 +75,8 @@ export const Dashboard = () => {
         </Flex>
       </HStack>
       <HStack px={["5", "0"]} pr={["5", "5"]} w="full">
-        <SimpleGrid gap={5} w="full" columns={{ sm: 1, md: 2, xl: 3 }} gridAutoFlow="row" >
-          <GridItem minH="100%">
+        <SimpleGrid gap={5} w="full" columns={{ sm: 1, md: 2, xl: 3 }} gridTemplateRows="max-content" >
+          <GridItem>
             <CardTrabalhos
               dados={[
                 { data: "30/10", trabalho: "Concentração" },
@@ -86,7 +86,7 @@ export const Dashboard = () => {
               ]}
             />
           </GridItem>
-          <GridItem minH="100%">
+          <GridItem>
             <CardAniversariantes
               dados={[
                 { data: "30/10", nome: "Vinicius", img:"https://bit.ly/ryan-florence" },
@@ -96,10 +96,8 @@ export const Dashboard = () => {
               ]}
             />
           </GridItem>
-          <GridItem minH="100%">
+          <GridItem>
             <CardTrabalhos
-              title="Próximos Trabalhos"
-              arrs={[1,2,3,4,5]}
               dados={[
                 { data: "30/10", trabalho: "Concentração" },
                 { data: "02/11", trabalho: "Santa Missa" },
