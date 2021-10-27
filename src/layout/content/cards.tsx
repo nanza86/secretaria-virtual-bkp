@@ -27,7 +27,7 @@ export const CardTrabalhos = (props: trabalhosProps) => {
   ));
 
   return (
-    <Box p={5} shadow="base" w="100%" borderRadius="md" bgColor="white">
+    <Box p={5} shadow="base" w="100%" minH="220px" borderRadius="md" bgColor="white">
       <Flex alignItems="center">
         <IconBox bg="teal.300" color="white" h="30px" w="30px" me="8px">
           <FaStarOfDavid size="18" />
@@ -59,7 +59,7 @@ export const CardAniversariantes = (props: aniversariantesProps) => {
   ));
 
   return (
-    <Box p={5} shadow="base" w="100%" borderRadius="md" bgColor="white">
+    <Box p={5} shadow="base" w="100%" minH="220px" borderRadius="md" bgColor="white">
       <Flex alignItems="center">
         <IconBox bg="teal.300" color="white" h="30px" w="30px" me="8px">
           <RiCake2Line size="18" />
