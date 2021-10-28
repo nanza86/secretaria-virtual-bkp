@@ -119,15 +119,27 @@ export const CardAniversariantes = (props: aniversariantesProps) => {
 interface presencaProps {
   dados: any[];
 }
+interface apexProps {
+  chart: {
+    id: string;
+    toolbar: {
+      show: boolean;
+    };
+  };
+  stroke: {
+    curve: any;
+  };
+  xaxis: {
+    categories: string[];
+  };
+}
+
 export const CardPresenca = (props: presencaProps) => {
-  const [options, setOptions] = useState({
+  const opttionsType: apexProps = {
     chart: {
       id: "basic-bar",
       toolbar: {
         show: false,
-        tools: {
-          download: false,
-        },
       },
     },
     stroke: {
@@ -136,7 +148,8 @@ export const CardPresenca = (props: presencaProps) => {
     xaxis: {
       categories: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
     },
-  });
+  };
+  const [options, setOptions] = useState(opttionsType);
   const [series, setSeries] = useState([...props.dados]);
 
   const ram = () => {
@@ -171,7 +184,7 @@ export const CardPresenca = (props: presencaProps) => {
     >
       <Flex alignItems="center">
         <IconBox bg="teal.300" color="white" h="30px" w="30px" me="8px">
-          <RiBookOpenLine onClick={handleUpdate} size="18" />
+          <RiBookOpenLine cursor="pointer" onClick={handleUpdate} size="18" />
         </IconBox>
         <Heading fontSize="md" color="gray.400" whiteSpace="nowrap">
           Livro de Presenças
@@ -215,9 +228,7 @@ export const CardOrquidario = () => {
         <Heading fontSize="2xl" color="yellow.400">
           Marcos Moysés
         </Heading>
-        <Divider
-          my="3"
-        />
+        <Divider my="3" />
         <Text color="white" fontWeight="semibold">
           Belezas e Primores
         </Text>
