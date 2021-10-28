@@ -177,7 +177,6 @@ export const CardPresenca = (props: presencaProps) => {
           Livro de Presenças
         </Heading>
       </Flex>
-      <Divider mt="3" />
       <Chart options={options} series={series} type="line" height="145px" />
     </Box>
   );
