@@ -15,8 +15,8 @@ import {
 import { RiMenuLine } from "react-icons/ri";
 import { Logo } from "./logo";
 import React from "react";
-import { MainMenu } from "../../layout/sidebar/accordion-menu";
-import { Searchbox } from "../utils/searchbox";
+import { MainMenu } from "../../layout/sidebar/accordionMenu";
+import { Searchbox } from "./searchbox";
 
 export const MobileMenu = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

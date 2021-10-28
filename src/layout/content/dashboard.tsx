@@ -3,16 +3,22 @@ import {
   Heading,
   Flex,
   Box,
+  Grid,
   SimpleGrid,
   GridItem,
 } from "@chakra-ui/react";
 import { Breadcrumbs } from "../../components/utils/breadcrumb";
 import { RiMenuLine } from "react-icons/ri";
 import IconBox from "../../components/utils/iconBox";
-import { CardAniversariantes, CardTrabalhos } from "./cards";
+import {
+  CardAniversariantes,
+  CardOrquidario,
+  CardPresenca,
+  CardTrabalhos,
+} from "./cards";
 import { AvatarAccount } from "../../components/utils/avatar";
 import { Searchbox } from "../../components/utils/searchbox";
-import { MobileMenu } from "../../components/utils/mobile-menu";
+import { MobileMenu } from "../../components/utils/mobileMenu";
 
 const Card = (props: any) => {
   return (
@@ -35,7 +41,7 @@ export const Dashboard = () => {
         w="full"
         alignItems="flex-start"
         mb="5"
-        borderBottomRadius={["2xl","none"]}
+        borderBottomRadius={["2xl", "none"]}
       >
         <Flex
           bgGradient="linear(to-r, gray.50 10%, rgba(255,255,255,0) 100%)"
@@ -75,9 +81,11 @@ export const Dashboard = () => {
           </HStack>
         </Flex>
       </HStack>
-      <HStack px={["5", "0"]} pr={["5", "5"]} w="full">
-        <SimpleGrid gap={5} w="full" columns={{ sm: 1, md: 2, xl: 3 }} gridTemplateRows="max-content" >
-          <GridItem>
+
+      {/** Proximos trabalhos e Aniversariantes */}
+      <HStack px={["5", "0"]} pr={["5", "5"]} pb="5" w="full">
+        <Grid gap={5} w="full" templateColumns="2.5fr 1.5fr">
+          <GridItem colSpan={[2, 2, 1]}>
             <CardTrabalhos
               dados={[
                 { data: "30/10", trabalho: "Concentração" },
@@ -87,27 +95,57 @@ export const Dashboard = () => {
               ]}
             />
           </GridItem>
-          <GridItem>
+          <GridItem colSpan={[2, 2, 1]}>
             <CardAniversariantes
               dados={[
-                { data: "30/10", nome: "Vinicius", img:"https://bit.ly/ryan-florence" },
-                { data: "02/11", nome: "Vilma", img:"https://bit.ly/kent-c-dodds" },
-                { data: "03/11", nome: "Thaisa", img:"https://bit.ly/sage-adebayo" },
-                { data: "15/11", nome: "Sidarta", img:"https://bit.ly/prosper-baba" },
+                {
+                  data: "30/10",
+                  nome: "Vinicius",
+                  img: "https://bit.ly/ryan-florence",
+                },
+                {
+                  data: "02/11",
+                  nome: "Vilma",
+                  img: "https://bit.ly/kent-c-dodds",
+                },
+                {
+                  data: "03/11",
+                  nome: "Thaisa",
+                  img: "https://bit.ly/sage-adebayo",
+                },
+                {
+                  data: "15/11",
+                  nome: "Sidarta",
+                  img: "https://bit.ly/prosper-baba",
+                },
               ]}
             />
           </GridItem>
-          <GridItem>
-            <CardTrabalhos
+        </Grid>
+      </HStack>
+
+      {/** Secretaria */}
+
+      <HStack px={["5", "0"]} pr={["5", "5"]} w="full">
+        <Grid gap={5} w="full" templateColumns="2.5fr 1.5fr">
+          <GridItem colSpan={[2, 2, 1]}>
+            <CardPresenca
               dados={[
-                { data: "30/10", trabalho: "Concentração" },
-                { data: "02/11", trabalho: "Santa Missa" },
-                { data: "03/11", trabalho: "Finados" },
-                { data: "15/11", trabalho: "Concentração" },
+                {
+                  name: "Fardados",
+                  data: [20, 10, 15, 10, 19, 10],
+                },
+                {
+                  name: "Visitantes",
+                  data: [10, 20, 5, 3, 5, 1],
+                },
               ]}
             />
           </GridItem>
-        </SimpleGrid>
+          <GridItem colSpan={[2, 2, 1]}>
+            <CardOrquidario />
+          </GridItem>
+        </Grid>
       </HStack>
     </>
   );
