@@ -128,10 +128,10 @@ export const CardPresenca = (props: presencaProps) => {
         tools: {
           download: false,
         },
-        stroke: {
-          curve: "smooth",
-        },
       },
+    },
+    stroke: {
+      curve: "smooth",
     },
     xaxis: {
       categories: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],

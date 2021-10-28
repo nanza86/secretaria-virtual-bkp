@@ -126,7 +126,7 @@ export const Dashboard = () => {
 
       {/** Secretaria */}
 
-      <HStack px={["5", "0"]} pr={["5", "5"]} w="full">
+      <HStack px={["5", "0"]} pr={["5", "5"]} pb={5} w="full">
         <Grid gap={5} w="full" templateColumns="2.5fr 1.5fr">
           <GridItem colSpan={[2, 2, 1]}>
             <CardPresenca
