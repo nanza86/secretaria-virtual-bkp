@@ -146,7 +146,7 @@ export const CardPresenca = (props: presencaProps) => {
       curve: "smooth",
     },
     xaxis: {
-      categories: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
+      categories: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
     },
   };
   const [options, setOptions] = useState(opttionsType);
@@ -163,11 +163,11 @@ export const CardPresenca = (props: presencaProps) => {
     const dados = [
       {
         name: "Fardados",
-        data: [ram(), ram(), ram(), ram(), ram(), ram()],
+        data: [ram(), ram(), ram(), ram(), ram(), ram(), ram(), ram(), ram(), ram(), ram(), ram()],
       },
       {
         name: "Visitantes",
-        data: [ram(), ram(), ram(), ram(), ram(), ram()],
+        data: [ram(), ram(), ram(), ram(), ram(), ram(), ram(), ram(), ram(), ram(), ram(), ram()],
       },
     ];
     setSeries(dados);
