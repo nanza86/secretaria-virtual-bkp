@@ -17,9 +17,13 @@ import {
   RiCalculatorLine,
 } from "react-icons/ri";
 import IconBox from "../../components/utils/iconBox";
-import Link from "next/link";
+import {useRouter} from "next/router";
 
 export const MainMenu = () => {
+  const rota = useRouter();
+  const handleClick = (url: string) => {
+    rota.push(url);
+  }
   return (
     <Accordion allowToggle w="full">
       {/** Manutenções */}
@@ -49,8 +53,9 @@ export const MainMenu = () => {
             my="1"
             bgColor="white"
             justifyContent="flex-start"
+            onClick={()=>handleClick("../zeladoria/mutiroes")}
           >
-            <Link href="../zeladoria/mutiroes">Mutirões</Link>
+            Mutirões
           </Button>
           <Button
             w="full"

@@ -1,10 +1,17 @@
 import type { NextPage } from "next";
-import { HStack, VStack, Flex } from "@chakra-ui/react";
+import { motion } from "framer-motion";
+import { HStack, VStack, Flex, chakra } from "@chakra-ui/react";
 import Head from "next/head";
 import { MainMenu } from "../src/layout/sidebar/accordionMenu";
 import { Logo } from "../src/components/utils/logo";
 import { Dashboard } from "../src/layout/content/dashboard";
 import { Searchbox } from "../src/components/utils/searchbox";
+
+const MotionBox = chakra(motion.div);
+const variants = {
+  visible: { opacity: 1, y: 0, transition: { duration: .5, ease: "easeOut" } },
+  hidden: { opacity: 0, y: -20 },
+};
 
 const Home: NextPage = () => {
   return (
@@ -22,7 +29,7 @@ const Home: NextPage = () => {
           flexShrink={0}
           display={["none", "flex"]}
         >
-          <Flex display={["none","flex"]} flexDirection="column">
+          <Flex display={["none", "flex"]} flexDirection="column">
             <Logo />
             <Searchbox />
           </Flex>
@@ -32,7 +39,9 @@ const Home: NextPage = () => {
         </VStack>
         {/** Main Content */}
         <VStack w="full" h="100vh" alignItems="flex-start">
-          <Dashboard />
+          <MotionBox w="full" initial="hidden" animate="visible" variants={variants}>
+            <Dashboard />
+          </MotionBox>
         </VStack>
       </HStack>
     </>
