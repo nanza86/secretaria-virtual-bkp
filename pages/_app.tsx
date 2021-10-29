@@ -15,7 +15,7 @@ const GlobalStyles = css`
   }
 `;
 
-function MyApp({ Component, pageProps }: AppProps) {
+function SecretariaVirtual({ Component, pageProps, router }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
       <Global styles={GlobalStyles} />
@@ -23,4 +23,4 @@ function MyApp({ Component, pageProps }: AppProps) {
     </ChakraProvider>
   );
 }
-export default MyApp;
+export default SecretariaVirtual;

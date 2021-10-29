@@ -21,7 +21,7 @@ import {
   RiBookOpenLine,
   RiArrowRightCircleFill,
 } from "react-icons/ri";
-import IconBox from "../../components/utils/iconBox";
+import IconBox from "./utils/iconBox";
 
 /** Card Trabalhos */
 interface trabalhosProps {
@@ -255,6 +255,32 @@ export const CardOrquidario = () => {
           />
         </Button>
       </Flex>
+    </Box>
+  );
+};
+
+
+/** Card Mutirão */
+interface mutiraoProps {
+  dados?: any[];
+}
+
+export const CardMutirao = (props: mutiraoProps) => {
+  return (
+    <Box
+      p={5}
+      shadow="base"
+      w="100%"
+      minH="220px"
+      borderRadius="md"
+      bgColor="white"
+    >
+      <Flex alignItems="center">
+        <Heading fontSize="md" color="gray.400" whiteSpace="nowrap">
+          Agrofloresta
+        </Heading>
+      </Flex>
+      <Divider mt="3" /> 
     </Box>
   );
 };

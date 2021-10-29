@@ -6,7 +6,11 @@ import {
   Flex,
 } from "@chakra-ui/react";
 
-export const Breadcrumbs = () => {
+interface breadcrumbProps {
+  path: string[];
+}
+export const Breadcrumbs = (props: breadcrumbProps) => {
+  const path = [...props.path];
   return (
     <Flex flexDir="row">
       <Text
@@ -15,7 +19,7 @@ export const Breadcrumbs = () => {
         me="2"
         display={["none", "none", "flex"]}
       >
-        Você está em:
+        Você está em:{" "}
       </Text>
       <Breadcrumb
         spacing="8px"
@@ -24,13 +28,11 @@ export const Breadcrumbs = () => {
         fontWeight="bold"
         color="gray.600"
       >
-        <BreadcrumbItem>
-          <BreadcrumbLink href="#">Início</BreadcrumbLink>
-        </BreadcrumbItem>
-
-        <BreadcrumbItem isCurrentPage>
-          <BreadcrumbLink href="#">Dashboard</BreadcrumbLink>
-        </BreadcrumbItem>
+        {path.map((item, key) => (
+          <BreadcrumbItem key={key}>
+            <BreadcrumbLink>{item}</BreadcrumbLink>
+          </BreadcrumbItem>
+        ))}
       </Breadcrumb>
     </Flex>
   );

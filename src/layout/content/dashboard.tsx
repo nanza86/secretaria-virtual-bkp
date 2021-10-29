@@ -15,7 +15,7 @@ import {
   CardOrquidario,
   CardPresenca,
   CardTrabalhos,
-} from "./cards";
+} from "../../components/cards";
 import { AvatarAccount } from "../../components/utils/avatar";
 import { Searchbox } from "../../components/utils/searchbox";
 import { MobileMenu } from "../../components/utils/mobileMenu";
@@ -66,7 +66,7 @@ export const Dashboard = () => {
           </Flex>
           <HStack justifyContent="space-between">
             <Flex flexDir="column">
-              <Breadcrumbs />
+              <Breadcrumbs path={["Início","Dashboard"]} />
               <Heading
                 fontWeight={["bold", "thin"]}
                 fontSize={["1.8em", "2.5em", "3em"]}
@@ -80,6 +80,30 @@ export const Dashboard = () => {
             </Flex>
           </HStack>
         </Flex>
+      </HStack>
+
+      {/** Secretaria */}
+
+      <HStack px={["5", "0"]} pr={["5", "5"]} pb={3} w="full">
+        <Grid gap={5} w="full" templateColumns="2.5fr 1.5fr">
+          <GridItem colSpan={[2, 2, 1]}>
+            <CardPresenca
+              dados={[
+                {
+                  name: "Fardados",
+                  data: [20, 10, 15, 10, 19, 10, 20, 10, 15, 10, 0, 0],
+                },
+                {
+                  name: "Visitantes",
+                  data: [10, 20, 5, 3, 5, 1, 20, 10, 15, 10, 0, 0],
+                },
+              ]}
+            />
+          </GridItem>
+          <GridItem colSpan={[2, 2, 1]}>
+            <CardOrquidario />
+          </GridItem>
+        </Grid>
       </HStack>
 
       {/** Proximos trabalhos e Aniversariantes */}
@@ -120,30 +144,6 @@ export const Dashboard = () => {
                 },
               ]}
             />
-          </GridItem>
-        </Grid>
-      </HStack>
-
-      {/** Secretaria */}
-
-      <HStack px={["5", "0"]} pr={["5", "5"]} pb={5} w="full">
-        <Grid gap={5} w="full" templateColumns="2.5fr 1.5fr">
-          <GridItem colSpan={[2, 2, 1]}>
-            <CardPresenca
-              dados={[
-                {
-                  name: "Fardados",
-                  data: [20, 10, 15, 10, 19, 10, 20, 10, 15, 10, 0, 0],
-                },
-                {
-                  name: "Visitantes",
-                  data: [10, 20, 5, 3, 5, 1, 20, 10, 15, 10, 0, 0],
-                },
-              ]}
-            />
-          </GridItem>
-          <GridItem colSpan={[2, 2, 1]}>
-            <CardOrquidario />
           </GridItem>
         </Grid>
       </HStack>

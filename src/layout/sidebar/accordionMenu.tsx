@@ -14,9 +14,10 @@ import {
   RiMedicineBottleLine,
   RiSeedlingLine,
   RiBook2Line,
-  RiCalculatorLine
+  RiCalculatorLine,
 } from "react-icons/ri";
 import IconBox from "../../components/utils/iconBox";
+import Link from "next/link";
 
 export const MainMenu = () => {
   return (
@@ -49,7 +50,7 @@ export const MainMenu = () => {
             bgColor="white"
             justifyContent="flex-start"
           >
-            Mutirões
+            <Link href="../zeladoria/mutiroes">Mutirões</Link>
           </Button>
           <Button
             w="full"
