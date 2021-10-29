@@ -1,27 +1,9 @@
-import {
-  HStack,
-  Heading,
-  Flex,
-  Box,
-  Stack,
-  Input,
-} from "@chakra-ui/react";
+import { HStack, Heading, Flex, Box, Stack, Input } from "@chakra-ui/react";
 import { Breadcrumbs } from "../../../components/utils/breadcrumb";
-import Link from "next/link";
 import { AvatarAccount } from "../../../components/utils/avatar";
 import { Searchbox } from "../../../components/utils/searchbox";
 import { MobileMenu } from "../../../components/utils/mobileMenu";
-
-const Card = (props: any) => {
-  return (
-    <Box p={5} shadow="base" flex="1" borderRadius="md" bgColor="white">
-      <Heading fontSize="md" color="gray.400">
-        {props.title}
-      </Heading>
-      <Flex pt="2">{props.children}</Flex>
-    </Box>
-  );
-};
+import { Motion, ItemMotion } from "../../../components/utils/motion";
 
 export const Mutirao = () => {
   return (
@@ -76,15 +58,17 @@ export const Mutirao = () => {
 
       {/** Secretaria */}
 
-      <HStack px={["5", "0"]} pr={["5", "5"]} pb={3} w="full">
-        <Box p={5} shadow="base" w="100%" borderRadius="md" bgColor="white">
-          <Flex w="full" overflowX="auto">
-            <Stack spacing={3}>
-              <Input placeholder="extra small size" />
-            </Stack>
-          </Flex>
-        </Box>
-      </HStack>
+      <Motion initial={ItemMotion.hidden} animate={ItemMotion.visible}>
+        <HStack px={["5", "0"]} pr={["5", "5"]} pb={3} w="full">
+          <Box p={5} shadow="base" w="100%" borderRadius="md" bgColor="white">
+            <Flex w="full" overflowX="auto">
+              <Stack spacing={3}>
+                <Input placeholder="extra small size" />
+              </Stack>
+            </Flex>
+          </Box>
+        </HStack>
+      </Motion>
     </>
   );
 };

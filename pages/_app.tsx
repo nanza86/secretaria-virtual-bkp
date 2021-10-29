@@ -1,9 +1,12 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Flex, HStack, VStack } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
 import "../src/styles/globals.css";
 import { theme } from "../src/styles/tema";
 import "focus-visible/dist/focus-visible";
 import { Global, css } from "@emotion/react";
+import { Searchbox } from "../src/components/utils/searchbox";
+import { Logo } from "../src/components/utils/logo";
+import { MainMenu } from "../src/layout/sidebar/accordionMenu";
 const GlobalStyles = css`
   /*
     This will hide the focus indicator if the element receives focus    via the mouse,
@@ -15,11 +18,32 @@ const GlobalStyles = css`
   }
 `;
 
-function SecretariaVirtual({ Component, pageProps, router }: AppProps) {
+function SecretariaVirtual({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
       <Global styles={GlobalStyles} />
-      <Component {...pageProps} />
+      <HStack w="full" spacing="0" alignItems="flex-start">
+        {/** Sidebar */}
+        <VStack
+          w="18em"
+          h="100vh"
+          p="10"
+          flexShrink={0}
+          display={["none", "flex"]}
+        >
+          <Flex display={["none", "flex"]} flexDirection="column">
+            <Logo />
+            <Searchbox />
+          </Flex>
+          <HStack w="full">
+            <MainMenu />
+          </HStack>
+        </VStack>
+        {/** Main Content */}
+        <VStack w="full" h="100vh" alignItems="flex-start">
+          <Component {...pageProps} />
+        </VStack>
+      </HStack>
     </ChakraProvider>
   );
 }

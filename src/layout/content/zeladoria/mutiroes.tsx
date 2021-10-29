@@ -11,8 +11,6 @@ import {
   Td,
   Avatar,
   AvatarGroup,
-  Divider,
-  Badge,
   Tag,
 } from "@chakra-ui/react";
 import { Breadcrumbs } from "../../../components/utils/breadcrumb";
@@ -20,17 +18,10 @@ import Link from "next/link";
 import { AvatarAccount } from "../../../components/utils/avatar";
 import { Searchbox } from "../../../components/utils/searchbox";
 import { MobileMenu } from "../../../components/utils/mobileMenu";
-
-const Card = (props: any) => {
-  return (
-    <Box p={5} shadow="base" flex="1" borderRadius="md" bgColor="white">
-      <Heading fontSize="md" color="gray.400">
-        {props.title}
-      </Heading>
-      <Flex pt="2">{props.children}</Flex>
-    </Box>
-  );
-};
+import {
+  Motion,
+  ItemMotion,
+} from "../../../components/utils/motion";
 
 export const Mutiroes = () => {
   return (
@@ -83,215 +74,217 @@ export const Mutiroes = () => {
         </Flex>
       </HStack>
 
-      {/** Secretaria */}
+      {/** Lista */}
 
-      <HStack px={["5", "0"]} pr={["5", "5"]} pb={3} w="full">
-        <Box p={5} shadow="base" w="100%" borderRadius="md" bgColor="white">
-          <Flex w="full" overflowX="auto">
-            <Table w="full" variant="striped" colorScheme="gray">
-              <Thead>
-                <Tr>
-                  <Th w="1">Data</Th>
-                  <Th>Objetivo</Th>
-                  <Th display={["none", "none", "none", "table-cell"]}>
-                    Responsável
-                  </Th>
-                  <Th w="1" display={["none", "none", "none", "table-cell"]}>
-                    Participantes
-                  </Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                <Tr>
-                  <Td>
-                    <Tag
-                      size="md"
-                      borderRadius="full"
-                      variant="solid"
+      <Motion initial={ItemMotion.hidden} animate={ItemMotion.visible}>
+        <HStack px={["5", "0"]} pr={["5", "5"]} pb={3} w="full">
+          <Box p={5} shadow="base" w="100%" borderRadius="md" bgColor="white">
+            <Flex w="full" overflowX="auto">
+              <Table w="full" variant="striped" colorScheme="gray">
+                <Thead>
+                  <Tr>
+                    <Th w="1">Data</Th>
+                    <Th>Objetivo</Th>
+                    <Th display={["none", "none", "none", "table-cell"]}>
+                      Responsável
+                    </Th>
+                    <Th w="1" display={["none", "none", "none", "table-cell"]}>
+                      Participantes
+                    </Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  <Tr>
+                    <Td>
+                      <Tag
+                        size="md"
+                        borderRadius="full"
+                        variant="solid"
+                        fontWeight="bold"
+                        bgColor="teal.300"
+                      >
+                        02/10/2021
+                      </Tag>
+                    </Td>
+                    <Td whiteSpace="nowrap" fontWeight="bold">
+                      <Link href="/zeladoria/mutirao">Agrofloresta</Link>
+                    </Td>
+                    <Td
+                      whiteSpace="nowrap"
+                      display={["none", "none", "none", "table-cell"]}
                       fontWeight="bold"
-                      bgColor="teal.300"
                     >
-                      02/10/2021
-                    </Tag>
-                  </Td>
-                  <Td whiteSpace="nowrap" fontWeight="bold">
-                    <Link href="/zeladoria/mutirao">Agrofloresta</Link>
-                  </Td>
-                  <Td
-                    whiteSpace="nowrap"
-                    display={["none", "none", "none", "table-cell"]}
-                    fontWeight="bold"
-                  >
-                    Ronan
-                  </Td>
-                  <Td display={["none", "none", "none", "table-cell"]}>
-                    <AvatarGroup size="sm" max={3}>
-                      <Avatar
-                        name="Ryan Florence"
-                        src="https://bit.ly/ryan-florence"
-                      />
-                      <Avatar
-                        name="Segun Adebayo"
-                        src="https://bit.ly/sage-adebayo"
-                      />
-                      <Avatar
-                        name="Kent Dodds"
-                        src="https://bit.ly/kent-c-dodds"
-                      />
-                      <Avatar
-                        name="Prosper Otemuyiwa"
-                        src="https://bit.ly/prosper-baba"
-                      />
-                      <Avatar
-                        name="Christian Nwamba"
-                        src="https://bit.ly/code-beast"
-                      />
-                    </AvatarGroup>
-                  </Td>
-                </Tr>
-                <Tr>
-                  <Td>
-                    <Tag
-                      size="md"
-                      borderRadius="full"
-                      variant="solid"
-                      fontWeight="bold"
-                      bgColor="gray.300"
+                      Ronan
+                    </Td>
+                    <Td display={["none", "none", "none", "table-cell"]}>
+                      <AvatarGroup size="sm" max={3}>
+                        <Avatar
+                          name="Ryan Florence"
+                          src="https://bit.ly/ryan-florence"
+                        />
+                        <Avatar
+                          name="Segun Adebayo"
+                          src="https://bit.ly/sage-adebayo"
+                        />
+                        <Avatar
+                          name="Kent Dodds"
+                          src="https://bit.ly/kent-c-dodds"
+                        />
+                        <Avatar
+                          name="Prosper Otemuyiwa"
+                          src="https://bit.ly/prosper-baba"
+                        />
+                        <Avatar
+                          name="Christian Nwamba"
+                          src="https://bit.ly/code-beast"
+                        />
+                      </AvatarGroup>
+                    </Td>
+                  </Tr>
+                  <Tr>
+                    <Td>
+                      <Tag
+                        size="md"
+                        borderRadius="full"
+                        variant="solid"
+                        fontWeight="bold"
+                        bgColor="gray.300"
+                      >
+                        02/10/2021
+                      </Tag>
+                    </Td>
+                    <Td whiteSpace="nowrap">
+                      <Link href="/">Orquidário</Link>
+                    </Td>
+                    <Td
+                      whiteSpace="nowrap"
+                      display={["none", "none", "none", "table-cell"]}
                     >
-                      02/10/2021
-                    </Tag>
-                  </Td>
-                  <Td whiteSpace="nowrap">
-                    <Link href="/">Orquidário</Link>
-                  </Td>
-                  <Td
-                    whiteSpace="nowrap"
-                    display={["none", "none", "none", "table-cell"]}
-                  >
-                    Malu
-                  </Td>
-                  <Td display={["none", "none", "none", "table-cell"]}>
-                    <AvatarGroup size="sm" max={3}>
-                      <Avatar
-                        name="Ryan Florence"
-                        src="https://bit.ly/ryan-florence"
-                      />
-                      <Avatar
-                        name="Segun Adebayo"
-                        src="https://bit.ly/sage-adebayo"
-                      />
-                      <Avatar
-                        name="Kent Dodds"
-                        src="https://bit.ly/kent-c-dodds"
-                      />
-                      <Avatar
-                        name="Prosper Otemuyiwa"
-                        src="https://bit.ly/prosper-baba"
-                      />
-                      <Avatar
-                        name="Christian Nwamba"
-                        src="https://bit.ly/code-beast"
-                      />
-                    </AvatarGroup>
-                  </Td>
-                </Tr>
-                <Tr>
-                  <Td>
-                    <Tag
-                      size="md"
-                      borderRadius="full"
-                      variant="solid"
-                      fontWeight="bold"
-                      bgColor="gray.300"
+                      Malu
+                    </Td>
+                    <Td display={["none", "none", "none", "table-cell"]}>
+                      <AvatarGroup size="sm" max={3}>
+                        <Avatar
+                          name="Ryan Florence"
+                          src="https://bit.ly/ryan-florence"
+                        />
+                        <Avatar
+                          name="Segun Adebayo"
+                          src="https://bit.ly/sage-adebayo"
+                        />
+                        <Avatar
+                          name="Kent Dodds"
+                          src="https://bit.ly/kent-c-dodds"
+                        />
+                        <Avatar
+                          name="Prosper Otemuyiwa"
+                          src="https://bit.ly/prosper-baba"
+                        />
+                        <Avatar
+                          name="Christian Nwamba"
+                          src="https://bit.ly/code-beast"
+                        />
+                      </AvatarGroup>
+                    </Td>
+                  </Tr>
+                  <Tr>
+                    <Td>
+                      <Tag
+                        size="md"
+                        borderRadius="full"
+                        variant="solid"
+                        fontWeight="bold"
+                        bgColor="gray.300"
+                      >
+                        02/10/2021
+                      </Tag>
+                    </Td>
+                    <Td whiteSpace="nowrap">
+                      <Link href="/">Cozinha</Link>
+                    </Td>
+                    <Td
+                      whiteSpace="nowrap"
+                      display={["none", "none", "none", "table-cell"]}
                     >
-                      02/10/2021
-                    </Tag>
-                  </Td>
-                  <Td whiteSpace="nowrap">
-                    <Link href="/">Cozinha</Link>
-                  </Td>
-                  <Td
-                    whiteSpace="nowrap"
-                    display={["none", "none", "none", "table-cell"]}
-                  >
-                    Vanessa
-                  </Td>
-                  <Td display={["none", "none", "none", "table-cell"]}>
-                    <AvatarGroup size="sm" max={3}>
-                      <Avatar
-                        name="Ryan Florence"
-                        src="https://bit.ly/ryan-florence"
-                      />
-                      <Avatar
-                        name="Segun Adebayo"
-                        src="https://bit.ly/sage-adebayo"
-                      />
-                      <Avatar
-                        name="Kent Dodds"
-                        src="https://bit.ly/kent-c-dodds"
-                      />
-                      <Avatar
-                        name="Prosper Otemuyiwa"
-                        src="https://bit.ly/prosper-baba"
-                      />
-                      <Avatar
-                        name="Christian Nwamba"
-                        src="https://bit.ly/code-beast"
-                      />
-                    </AvatarGroup>
-                  </Td>
-                </Tr>
-                <Tr>
-                  <Td>
-                    <Tag
-                      size="md"
-                      borderRadius="full"
-                      variant="solid"
-                      fontWeight="bold"
-                      bgColor="gray.300"
+                      Vanessa
+                    </Td>
+                    <Td display={["none", "none", "none", "table-cell"]}>
+                      <AvatarGroup size="sm" max={3}>
+                        <Avatar
+                          name="Ryan Florence"
+                          src="https://bit.ly/ryan-florence"
+                        />
+                        <Avatar
+                          name="Segun Adebayo"
+                          src="https://bit.ly/sage-adebayo"
+                        />
+                        <Avatar
+                          name="Kent Dodds"
+                          src="https://bit.ly/kent-c-dodds"
+                        />
+                        <Avatar
+                          name="Prosper Otemuyiwa"
+                          src="https://bit.ly/prosper-baba"
+                        />
+                        <Avatar
+                          name="Christian Nwamba"
+                          src="https://bit.ly/code-beast"
+                        />
+                      </AvatarGroup>
+                    </Td>
+                  </Tr>
+                  <Tr>
+                    <Td>
+                      <Tag
+                        size="md"
+                        borderRadius="full"
+                        variant="solid"
+                        fontWeight="bold"
+                        bgColor="gray.300"
+                      >
+                        02/10/2021
+                      </Tag>
+                    </Td>
+                    <Td whiteSpace="nowrap">
+                      <Link href="/">Agrofloresta</Link>
+                    </Td>
+                    <Td
+                      whiteSpace="nowrap"
+                      display={["none", "none", "none", "table-cell"]}
                     >
-                      02/10/2021
-                    </Tag>
-                  </Td>
-                  <Td whiteSpace="nowrap">
-                    <Link href="/">Agrofloresta</Link>
-                  </Td>
-                  <Td
-                    whiteSpace="nowrap"
-                    display={["none", "none", "none", "table-cell"]}
-                  >
-                    Ronan
-                  </Td>
-                  <Td display={["none", "none", "none", "table-cell"]}>
-                    <AvatarGroup size="sm" max={3}>
-                      <Avatar
-                        name="Ryan Florence"
-                        src="https://bit.ly/ryan-florence"
-                      />
-                      <Avatar
-                        name="Segun Adebayo"
-                        src="https://bit.ly/sage-adebayo"
-                      />
-                      <Avatar
-                        name="Kent Dodds"
-                        src="https://bit.ly/kent-c-dodds"
-                      />
-                      <Avatar
-                        name="Prosper Otemuyiwa"
-                        src="https://bit.ly/prosper-baba"
-                      />
-                      <Avatar
-                        name="Christian Nwamba"
-                        src="https://bit.ly/code-beast"
-                      />
-                    </AvatarGroup>
-                  </Td>
-                </Tr>
-              </Tbody>
-            </Table>
-          </Flex>
-        </Box>
-      </HStack>
+                      Ronan
+                    </Td>
+                    <Td display={["none", "none", "none", "table-cell"]}>
+                      <AvatarGroup size="sm" max={3}>
+                        <Avatar
+                          name="Ryan Florence"
+                          src="https://bit.ly/ryan-florence"
+                        />
+                        <Avatar
+                          name="Segun Adebayo"
+                          src="https://bit.ly/sage-adebayo"
+                        />
+                        <Avatar
+                          name="Kent Dodds"
+                          src="https://bit.ly/kent-c-dodds"
+                        />
+                        <Avatar
+                          name="Prosper Otemuyiwa"
+                          src="https://bit.ly/prosper-baba"
+                        />
+                        <Avatar
+                          name="Christian Nwamba"
+                          src="https://bit.ly/code-beast"
+                        />
+                      </AvatarGroup>
+                    </Td>
+                  </Tr>
+                </Tbody>
+              </Table>
+            </Flex>
+          </Box>
+        </HStack>
+      </Motion>
     </>
   );
 };
