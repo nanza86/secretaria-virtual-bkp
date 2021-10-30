@@ -19,13 +19,13 @@ export const Logo = () => {
           p="0"
           fontSize="md"
           fontWeight="800"
-          color="gray"
+          color="gray.600"
           flexWrap="nowrap"
           whiteSpace="nowrap"
         >
           Secretaria Virtual
         </Heading>
-        <Text mt="-4px !important" p="0" fontSize="0.9em" color="gray.400">
+        <Text mt="-4px !important" p="0" fontSize="0.9em" color="gray.500">
           Flor de Jagube
         </Text>
       </VStack>

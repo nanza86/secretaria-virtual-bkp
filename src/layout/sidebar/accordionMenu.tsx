@@ -53,7 +53,7 @@ export const MainMenu = () => {
             my="1"
             bgColor="white"
             justifyContent="flex-start"
-            onClick={()=>handleClick("../zeladoria/mutiroes")}
+            onClick={()=>handleClick("/zeladoria/mutiroes")}
           >
             Mutirões
           </Button>

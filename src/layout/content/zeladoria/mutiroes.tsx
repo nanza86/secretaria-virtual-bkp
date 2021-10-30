@@ -27,9 +27,9 @@ export const Mutiroes = () => {
   return (
     <>
       <HStack
-        bgImage="../bg-flor.jpg"
+        bgImage="/bg-zeladoria.jpg"
         bgSize="cover"
-        bgPosition="center"
+        bgPosition="bottom"
         w="full"
         alignItems="flex-start"
         mb="5"
@@ -77,7 +77,7 @@ export const Mutiroes = () => {
       {/** Lista */}
 
       <Motion initial={ItemMotion.hidden} animate={ItemMotion.visible}>
-        <HStack px={["5", "0"]} pr={["5", "5"]} pb={3} w="full">
+        <HStack px={["5", "0"]} pr={["5", "5"]} pb={5} w="full">
           <Box p={5} shadow="base" w="100%" borderRadius="md" bgColor="white">
             <Flex w="full" overflowX="auto">
               <Table w="full" variant="striped" colorScheme="gray">
@@ -107,7 +107,7 @@ export const Mutiroes = () => {
                       </Tag>
                     </Td>
                     <Td whiteSpace="nowrap" fontWeight="bold">
-                      <Link href="/zeladoria/mutirao">Agrofloresta</Link>
+                      <Link href="/zeladoria/mutiroes/Agrofloresta">Agrofloresta</Link>
                     </Td>
                     <Td
                       whiteSpace="nowrap"
