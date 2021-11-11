@@ -3,6 +3,7 @@ import {
   Heading,
   Flex,
   Box,
+  Button,
   Table,
   Thead,
   Tbody,
@@ -12,13 +13,16 @@ import {
   Avatar,
   AvatarGroup,
   Tag,
+  Divider,
 } from "@chakra-ui/react";
 import { Breadcrumbs } from "../../../components/utils/breadcrumb";
 import Link from "next/link";
+import { ArrowBackIcon, CheckCircleIcon } from "@chakra-ui/icons";
 import { AvatarAccount } from "../../../components/utils/avatar";
 import { Searchbox } from "../../../components/utils/searchbox";
 import { MobileMenu } from "../../../components/utils/mobileMenu";
 import { Motion, ItemMotion } from "../../../components/utils/motion";
+import router from "next/router";
 
 export const Mutiroes = (props: any) => {
   const listaMutiroes = props.lista;
@@ -77,6 +81,30 @@ export const Mutiroes = (props: any) => {
       <Motion initial={ItemMotion.hidden} animate={ItemMotion.visible}>
         <HStack px={["5", "0"]} pr={["5", "5"]} pb={5} w="full">
           <Box p={5} shadow="base" w="100%" borderRadius="md" bgColor="white">
+            <HStack justifyContent="space-between">
+              <Flex>
+                <Button
+                  onClick={() => router.back()}
+                  colorScheme="gray"
+                  variant="outline"
+                >
+                  <ArrowBackIcon />
+                </Button>
+              </Flex>
+              <Flex>
+                <Button
+                  leftIcon={<CheckCircleIcon />}
+                  colorScheme="teal"
+                  variant="solid"
+                  me="2"
+                  type="submit"
+                  loadingText="Salvando"
+                >
+                  Cadastrar Novo Mutirão
+                </Button>
+              </Flex>
+            </HStack>
+            <Divider my="4" />
             <Flex w="full" overflowX="auto">
               <Table w="full" variant="striped" colorScheme="gray">
                 <Thead>

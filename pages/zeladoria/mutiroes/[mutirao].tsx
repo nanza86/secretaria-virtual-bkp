@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import type { NextPage, GetStaticProps, InferGetStaticPropsType } from "next";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { Motion, ContentMotion } from "../../../src/components/utils/motion";
@@ -17,7 +17,7 @@ export async function getStaticPaths() {
   return { paths, fallback: false };
 }
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const mutirao = await prisma.mutirao.findUnique({
     where: {
       id: params.mutirao,

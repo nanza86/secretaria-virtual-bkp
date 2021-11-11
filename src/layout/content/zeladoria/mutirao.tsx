@@ -154,7 +154,7 @@ export const Mutirao = (props: MutiraoProps) => {
                 </Flex>
                 <Flex>
                   <Button
-                    rightIcon={<CheckIcon />}
+                    leftIcon={<CheckIcon />}
                     colorScheme="green"
                     variant="outline"
                     me="2"
@@ -165,7 +165,7 @@ export const Mutirao = (props: MutiraoProps) => {
                     Salvar
                   </Button>
                   <Button
-                    rightIcon={<DeleteIcon h="4" />}
+                    leftIcon={<DeleteIcon h="4" />}
                     colorScheme="red"
                     variant="outline"
                     onClick={onOpen}
@@ -300,6 +300,7 @@ export const Mutirao = (props: MutiraoProps) => {
             </Button>
             <Button
               variant="ghost"
+              colorScheme="red"
               isLoading={deleting}
               loadingText="Excluindo"
               onClick={() => {
