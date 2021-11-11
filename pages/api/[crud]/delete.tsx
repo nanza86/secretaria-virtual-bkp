@@ -12,7 +12,7 @@ export default async function updateMutirao(
   }
   try {
     const mutiroes = await prisma.mutirao.delete({
-      where: { id: query.crud[0] },
+      where: { id: String(query.crud) },
     });
     res.status(200).json(mutiroes);
   } catch (e) {
