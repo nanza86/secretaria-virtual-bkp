@@ -15,7 +15,7 @@ import {
   Avatar,
   TagLabel,
 } from "@chakra-ui/react";
-import { ArrowBackIcon, EditIcon, DeleteIcon } from "@chakra-ui/icons";
+import { ArrowBackIcon, CheckIcon, DeleteIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import { Breadcrumbs } from "../../../components/utils/breadcrumb";
@@ -23,18 +23,40 @@ import { AvatarAccount } from "../../../components/utils/avatar";
 import { Searchbox } from "../../../components/utils/searchbox";
 import { MobileMenu } from "../../../components/utils/mobileMenu";
 import { Motion, ItemMotion } from "../../../components/utils/motion";
+import { useState } from "react";
 
 interface MutiraoProps {
-  id: any;
+  body: any;
 }
+
 export const Mutirao = (props: MutiraoProps) => {
+  const [loading, setLoading] = useState(false);
+  const data = props.body;
   const router = useRouter();
   const formik = useFormik({
-    initialValues: {},
-    onSubmit: (values) => {
-      alert(values);
+    initialValues: { ...data },
+    onSubmit: async (formValues) => {
+      setLoading(true);
+      const urlApi = "/api/" + formValues.id + "/update";
+      const deleteId = formValues;
+      delete deleteId["id"];
+
+      const postData = await fetch(urlApi, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(deleteId),
+      });
+      if (!postData.ok) {
+        throw new Error(postData.statusText);
+      }else{
+        setLoading(false);
+      }
+      return await postData.json();
     },
   });
+
   return (
     <>
       <HStack
@@ -90,73 +112,95 @@ export const Mutirao = (props: MutiraoProps) => {
       <Motion initial={ItemMotion.hidden} animate={ItemMotion.visible}>
         <HStack px={["5", "0"]} pr={["5", "5"]} pb={5} w="full">
           <Box p={5} shadow="base" w="100%" borderRadius="md" bgColor="white">
-            <HStack justifyContent="space-between">
-              <Flex>
-                <Button
-                  onClick={() => router.back()}
-                  colorScheme="gray"
-                  variant="outline"
-                >
-                  <ArrowBackIcon />
-                </Button>
-              </Flex>
-              <Flex>
-                <Button
-                  rightIcon={<EditIcon />}
-                  colorScheme="gray"
-                  variant="outline"
-                  me="2"
-                >
-                  Editar
-                </Button>
-                <Button
-                  rightIcon={<DeleteIcon h="4" />}
-                  colorScheme="red"
-                  variant="outline"
-                >
-                  Excluir
-                </Button>
-              </Flex>
-            </HStack>
-            <Divider my="4" />
-            <HStack
-              justifyContent="flex-start"
-              alignItems="flex-start"
-              flexDirection="column"
-              w="full"
-            >
-              <form onSubmit={formik.handleSubmit}>
-                <FormControl id="nome" mb="5">
+            <form onSubmit={formik.handleSubmit}>
+              <HStack justifyContent="space-between">
+                <Flex>
+                  <Button
+                    onClick={() => router.back()}
+                    colorScheme="gray"
+                    variant="outline"
+                  >
+                    <ArrowBackIcon />
+                  </Button>
+                </Flex>
+                <Flex>
+                  <Button
+                    rightIcon={<CheckIcon />}
+                    colorScheme="green"
+                    variant="outline"
+                    me="2"
+                    type="submit"
+                    isLoading={loading}
+                    loadingText="Salvando"
+                  >
+                    Salvar
+                  </Button>
+                  <Button
+                    rightIcon={<DeleteIcon h="4" />}
+                    colorScheme="red"
+                    variant="outline"
+                  >
+                    Excluir
+                  </Button>
+                </Flex>
+              </HStack>
+              <Divider my="4" />
+              <HStack
+                justifyContent="flex-start"
+                alignItems="flex-start"
+                flexDirection="column"
+                w="full"
+              >
+                <FormControl id="nome" pb="5">
                   <FormLabel fontWeight="semibold">Nome do mutirão:</FormLabel>
-                  <Input value={props.id} />
+                  <Input
+                    name="nome"
+                    defaultValue={formik.values.nome}
+                    onChange={formik.handleChange}
+                  />
                 </FormControl>
-                <FormControl id="objetivos" mb="5">
+                <FormControl id="objetivos" pb="5">
                   <FormLabel fontWeight="semibold">Objetivos:</FormLabel>
-                  <Textarea></Textarea>
+                  <Textarea
+                    defaultValue={formik.values.objetivos}
+                    onChange={formik.handleChange}
+                  ></Textarea>
                 </FormControl>
                 <Flex w="100%">
                   <Flex me="5" w="60%">
-                    <FormControl id="responsavel" mb="5">
+                    <FormControl id="responsavel" pb="5">
                       <FormLabel fontWeight="semibold">Responsável:</FormLabel>
-                      <Input />
+                      <Input
+                        defaultValue={formik.values.responsavel}
+                        onChange={formik.handleChange}
+                      />
                     </FormControl>
                   </Flex>
                   <Flex w="40%">
-                    <FormControl id="data" mb="5">
+                    <FormControl id="data" pb="5">
                       <FormLabel fontWeight="semibold">Data: </FormLabel>
-                      <Input />
+                      <Input
+                        defaultValue={formik.values.data_mutirao}
+                        onChange={formik.handleChange}
+                      />
                     </FormControl>
                   </Flex>
                 </Flex>
-                <FormControl id="requisitos" mb="5">
+                <FormControl id="requisitos" pb="5">
                   <FormLabel fontWeight="semibold">Requisitos:</FormLabel>
-                  <Textarea></Textarea>
+                  <Textarea
+                    defaultValue={formik.values.requisitos}
+                    onChange={formik.handleChange}
+                  ></Textarea>
                 </FormControl>
-                <FormControl id="local" mb="5">
+                <FormControl id="local" pb="5">
                   <FormLabel fontWeight="semibold">Local:</FormLabel>
-                  <Input value={props.id} />
+                  <Input
+                    defaultValue={formik.values.local}
+                    onChange={formik.handleChange}
+                  />
                 </FormControl>
-                <FormControl id="nome" mb="5">
+                <FormControl id="nome" pb="5">
                   <FormLabel fontWeight="semibold">
                     Participantes confirmados:
                   </FormLabel>
@@ -205,8 +249,8 @@ export const Mutirao = (props: MutiraoProps) => {
                     <TagLabel>Kent Dodds</TagLabel>
                   </Tag>
                 </FormControl>
-              </form>
-            </HStack>
+              </HStack>
+            </form>
           </Box>
         </HStack>
       </Motion>
