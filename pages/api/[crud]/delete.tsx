@@ -11,7 +11,7 @@ export default async function updateMutirao(
     return res.status(405).json({ message: "só post que pode!" });
   }
   try {
-    const queryId = query.crud;
+    const queryId = query.crud[0];
     const mutiroes = await prisma.mutirao.delete({
       where: { id: queryId },
     });
