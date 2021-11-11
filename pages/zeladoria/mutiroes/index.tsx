@@ -8,7 +8,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const listaMutiroes = await prisma.mutirao.findMany();
   return {
     props: { listaMutiroes },
-    revalidate: 0,
+    revalidate: 1,
   };
 };
 

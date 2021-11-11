@@ -25,7 +25,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: InferGetStaticP
   });
   return {
     props: { mutirao },
-    revalidate: 0,
+    revalidate: 1,
   };
 };
 
