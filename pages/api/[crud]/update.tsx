@@ -12,7 +12,7 @@ export default async function updateMutirao(
   }
   try {
     const mutiroes = await prisma.mutirao.update({
-      where: { id: query.crud },
+      where: { id: query.crud[0] },
       data: body,
     });
     res.status(200).json(mutiroes);
