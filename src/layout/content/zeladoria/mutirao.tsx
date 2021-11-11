@@ -14,6 +14,14 @@ import {
   Tag,
   Avatar,
   TagLabel,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { ArrowBackIcon, CheckIcon, DeleteIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
@@ -31,6 +39,8 @@ interface MutiraoProps {
 
 export const Mutirao = (props: MutiraoProps) => {
   const [loading, setLoading] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const data = props.body;
   const router = useRouter();
   const formik = useFormik({
@@ -50,12 +60,31 @@ export const Mutirao = (props: MutiraoProps) => {
       });
       if (!postData.ok) {
         throw new Error(postData.statusText);
-      }else{
+      } else {
         setLoading(false);
       }
       return await postData.json();
     },
   });
+  const deleteMutirao = async (idMutirao: any) => {
+    setDeleting(true);
+    const urlApi = "/api/" + idMutirao + "/delete";
+    console.log(urlApi);
+
+    const postData = await fetch(urlApi, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(idMutirao),
+    });
+    if (!postData.ok) {
+      throw new Error(postData.statusText);
+    } else {
+      setLoading(false);
+      router.back();
+    }
+  };
 
   return (
     <>
@@ -139,6 +168,7 @@ export const Mutirao = (props: MutiraoProps) => {
                     rightIcon={<DeleteIcon h="4" />}
                     colorScheme="red"
                     variant="outline"
+                    onClick={onOpen}
                   >
                     Excluir
                   </Button>
@@ -254,6 +284,33 @@ export const Mutirao = (props: MutiraoProps) => {
           </Box>
         </HStack>
       </Motion>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Excluir Mutirão</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            Você tem certeza que deseja excluir esse mutirão?
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              Cancelar
+            </Button>
+            <Button
+              variant="ghost"
+              isLoading={deleting}
+              loadingText="Excluindo"
+              onClick={() => {
+                deleteMutirao(formik.values.id);
+              }}
+            >
+              Quero Excluir
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 };
