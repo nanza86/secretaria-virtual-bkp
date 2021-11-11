@@ -17,7 +17,9 @@ export async function getStaticPaths() {
   return { paths, fallback: false };
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }: InferGetStaticPropsType<typeof getStaticProps>) => {
+export const getStaticProps: GetStaticProps = async ({
+  params,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const mutirao = await prisma.mutirao.findUnique({
     where: {
       id: params.mutirao,

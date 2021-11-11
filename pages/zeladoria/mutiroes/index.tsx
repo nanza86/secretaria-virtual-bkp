@@ -2,7 +2,7 @@ import type { NextPage, GetStaticProps } from "next";
 import Head from "next/head";
 import { Motion, ContentMotion } from "../../../src/components/utils/motion";
 import { Mutiroes } from "../../../src/layout/content/zeladoria/mutiroes";
-import { prisma } from "../../../src/database/prisma"
+import { prisma } from "../../../src/database/prisma";
 
 export const getStaticProps: GetStaticProps = async () => {
   const listaMutiroes = await prisma.mutirao.findMany();
