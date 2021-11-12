@@ -13,12 +13,12 @@ datasource db {
   
 model Mutirao {
   id            String @id @default(dbgenerated()) @map("_id") @db.ObjectId
-  nome          String
-  objetivos     String
-  responsavel   String
-  data_cadastro String
-  data_mutirao  String
-  requisitos    String
-  local         String
-  participantes String
+  nome          String?
+  objetivos     String?
+  responsavel   String?
+  data_cadastro String?
+  data_mutirao  String?
+  requisitos    String?
+  local         String?
+  participantes String?
 }

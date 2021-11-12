@@ -15,16 +15,16 @@ import {
   Tag,
   Divider,
 } from "@chakra-ui/react";
-import { Breadcrumbs } from "../../../components/utils/breadcrumb";
+import { Breadcrumbs } from "../../../../components/utils/breadcrumb";
 import Link from "next/link";
 import { ArrowBackIcon, CheckCircleIcon } from "@chakra-ui/icons";
-import { AvatarAccount } from "../../../components/utils/avatar";
-import { Searchbox } from "../../../components/utils/searchbox";
-import { MobileMenu } from "../../../components/utils/mobileMenu";
-import { Motion, ItemMotion } from "../../../components/utils/motion";
+import { AvatarAccount } from "../../../../components/utils/avatar";
+import { Searchbox } from "../../../../components/utils/searchbox";
+import { MobileMenu } from "../../../../components/utils/mobileMenu";
+import { Motion, ItemMotion } from "../../../../components/utils/motion";
 import router from "next/router";
 
-export const Mutiroes = (props: any) => {
+export const MutiroesList = (props: any) => {
   const listaMutiroes = props.lista;
   return (
     <>
@@ -97,8 +97,7 @@ export const Mutiroes = (props: any) => {
                   colorScheme="teal"
                   variant="solid"
                   me="2"
-                  type="submit"
-                  loadingText="Salvando"
+                  onClick={() => router.push('/zeladoria/mutiroes/create')}
                 >
                   Cadastrar Novo Mutirão
                 </Button>
@@ -130,7 +129,9 @@ export const Mutiroes = (props: any) => {
                           fontWeight="bold"
                           bgColor="teal.300"
                         >
+                        <Link href={"/zeladoria/mutiroes/" + item.id}>
                           {item.data_mutirao}
+                        </Link>
                         </Tag>
                       </Td>
                       <Td whiteSpace="nowrap" fontWeight="bold">
@@ -143,7 +144,9 @@ export const Mutiroes = (props: any) => {
                         display={["none", "none", "none", "table-cell"]}
                         fontWeight="bold"
                       >
+                      <Link href={"/zeladoria/mutiroes/" + item.id}>
                         {item.responsavel}
+                      </Link>
                       </Td>
                       <Td display={["none", "none", "none", "table-cell"]}>
                         <AvatarGroup size="sm" max={3}>

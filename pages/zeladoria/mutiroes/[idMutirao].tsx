@@ -6,7 +6,7 @@ import type {
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { Motion, ContentMotion } from "../../../src/components/utils/motion";
-import { Mutirao } from "../../../src/layout/content/zeladoria/mutirao";
+import { MutiraoUpdateForm } from "../../../src/layout/content/zeladoria/mutirao/update";
 import { prisma } from "../../../src/database/prisma";
 
 /*export async function getStaticPaths() {
@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const idMutirao = context.query;
   const lista = await prisma.mutirao.findUnique({
     where: {
-      id: String(idMutirao.mutirao),
+      id: String(idMutirao.idMutirao),
     },
   });
   return {
@@ -45,7 +45,7 @@ const ZeladoriaMutirao: NextPage = (props: any) => {
         initial={ContentMotion.hidden}
         animate={ContentMotion.visible}
       >
-        <Mutirao body={props.lista} />
+        <MutiraoUpdateForm body={props.lista} />
       </Motion>
     </>
   );

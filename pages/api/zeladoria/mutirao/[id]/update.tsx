@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from "../../../src/database/prisma";
+import { prisma } from "../../../../../src/database/prisma";
 
 export default async function updateMutirao(
   req: NextApiRequest,
@@ -11,8 +11,9 @@ export default async function updateMutirao(
     return res.status(405).json({ message: "só post que pode!" });
   }
   try {
-    const mutiroes = await prisma.mutirao.delete({
-      where: { id: String(query.crud) },
+    const mutiroes = await prisma.mutirao.update({
+      where: { id: String(query.id) },
+      data: body,
     });
     res.status(200).json(mutiroes);
   } catch (e) {

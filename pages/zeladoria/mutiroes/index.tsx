@@ -1,7 +1,7 @@
 import type { NextPage, GetServerSideProps } from "next";
 import Head from "next/head";
 import { Motion, ContentMotion } from "../../../src/components/utils/motion";
-import { Mutiroes } from "../../../src/layout/content/zeladoria/mutiroes";
+import { MutiroesList } from "../../../src/layout/content/zeladoria/mutirao/list";
 import { prisma } from "../../../src/database/prisma";
 
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -23,7 +23,7 @@ const ZeladoriaMutiroes: NextPage = (props: any) => {
         initial={ContentMotion.hidden}
         animate={ContentMotion.visible}
       >
-        <Mutiroes lista={props.listaMutiroes} />
+        <MutiroesList lista={props.listaMutiroes} />
       </Motion>
     </>
   );

@@ -12,6 +12,7 @@ import {
   FormErrorMessage,
   FormHelperText,
   Tag,
+  useToast,
   Avatar,
   TagLabel,
   Modal,
@@ -26,28 +27,30 @@ import {
 import { ArrowBackIcon, CheckIcon, DeleteIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
-import { Breadcrumbs } from "../../../components/utils/breadcrumb";
-import { AvatarAccount } from "../../../components/utils/avatar";
-import { Searchbox } from "../../../components/utils/searchbox";
-import { MobileMenu } from "../../../components/utils/mobileMenu";
-import { Motion, ItemMotion } from "../../../components/utils/motion";
+import { Breadcrumbs } from "../../../../components/utils/breadcrumb";
+import { AvatarAccount } from "../../../../components/utils/avatar";
+import { Searchbox } from "../../../../components/utils/searchbox";
+import { MobileMenu } from "../../../../components/utils/mobileMenu";
+import { Motion, ItemMotion } from "../../../../components/utils/motion";
 import { useState } from "react";
 
 interface MutiraoProps {
   body: any;
 }
 
-export const Mutirao = (props: MutiraoProps) => {
+export const MutiraoUpdateForm = (props: MutiraoProps) => {
   const [loading, setLoading] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const data = props.body;
   const router = useRouter();
+  const toast = useToast();
+
   const formik = useFormik({
     initialValues: { ...data },
     onSubmit: async (formValues) => {
       setLoading(true);
-      const urlApi = "/api/" + formValues.id + "/update";
+      const urlApi = "/api/zeladoria/mutirao/" + formValues.id + "/update";
       const deleteId = formValues;
       delete deleteId["id"];
 
@@ -62,13 +65,14 @@ export const Mutirao = (props: MutiraoProps) => {
         throw new Error(postData.statusText);
       } else {
         setLoading(false);
+        ToastFeedback("Mutirão atualizado com sucesso!", "success");
       }
       return await postData.json();
     },
   });
   const deleteMutirao = async (idMutirao: any) => {
     setDeleting(true);
-    const urlApi = "/api/" + idMutirao + "/delete";
+    const urlApi = "/api/zeladoria/mutirao/" + idMutirao + "/delete";
     console.log(urlApi);
 
     const postData = await fetch(urlApi, {
@@ -76,7 +80,6 @@ export const Mutirao = (props: MutiraoProps) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(idMutirao),
     });
     if (!postData.ok) {
       throw new Error(postData.statusText);
@@ -85,7 +88,17 @@ export const Mutirao = (props: MutiraoProps) => {
       router.back();
     }
   };
-
+  const ToastFeedback = (
+    title: string,
+    statuses: "success" | "error" | "warning" | "info"
+  ) => {
+    toast({
+      title: title,
+      position: "bottom-right",
+      status: statuses,
+      isClosable: true,
+    });
+  };
   return (
     <>
       <HStack
@@ -207,7 +220,7 @@ export const Mutirao = (props: MutiraoProps) => {
                     </FormControl>
                   </Flex>
                   <Flex w="40%">
-                    <FormControl id="data" pb="5">
+                    <FormControl id="data_mutirao" pb="5">
                       <FormLabel fontWeight="semibold">Data: </FormLabel>
                       <Input
                         defaultValue={formik.values.data_mutirao}
