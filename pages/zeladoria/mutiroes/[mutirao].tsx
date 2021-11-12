@@ -1,11 +1,15 @@
-import type { NextPage, GetStaticProps, InferGetStaticPropsType } from "next";
+import type {
+  NextPage,
+  GetServerSideProps,
+  InferGetStaticPropsType,
+} from "next";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { Motion, ContentMotion } from "../../../src/components/utils/motion";
 import { Mutirao } from "../../../src/layout/content/zeladoria/mutirao";
 import { prisma } from "../../../src/database/prisma";
 
-export async function getStaticPaths() {
+/*export async function getStaticPaths() {
   // Call an external API endpoint to get posts
   const listaMutiroes = await prisma.mutirao.findMany();
   // Get the paths we want to pre-render based on posts
@@ -15,19 +19,17 @@ export async function getStaticPaths() {
   // We'll pre-render only these paths at build time.
   // { fallback: false } means other routes should 404.
   return { paths, fallback: false };
-}
+}*/
 
-export const getStaticProps: GetStaticProps = async ({
-  params,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const mutirao = await prisma.mutirao.findUnique({
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const idMutirao = context.query;
+  const lista = await prisma.mutirao.findUnique({
     where: {
-      id: params.mutirao,
+      id: String(idMutirao.mutirao),
     },
   });
   return {
-    props: { mutirao },
-    revalidate: 1,
+    props: { lista },
   };
 };
 
@@ -43,7 +45,7 @@ const ZeladoriaMutirao: NextPage = (props: any) => {
         initial={ContentMotion.hidden}
         animate={ContentMotion.visible}
       >
-        <Mutirao body={props.mutirao} />
+        <Mutirao body={props.lista} />
       </Motion>
     </>
   );
