@@ -2,9 +2,6 @@ import { Formik, Form } from "formik";
 import React, { useState } from "react";
 import * as yup from "yup";
 import FormField from "../src/components/utils/formInput";
-import { ptBR } from "date-fns/locale";
-import { DatePicker } from "react-nice-dates";
-import "react-nice-dates/build/style.css";
 
 const Index = (props: any) => {
   const listMutiroes = props.mutiroes;
@@ -25,14 +22,7 @@ const Index = (props: any) => {
       >
         {({ errors, touched }) => (
           <Form>
-            <DatePicker date={date} onDateChange={setDate} locale={ptBR}>
-              {({ inputProps, focused }) => (
-                <input
-                  className={"input" + (focused ? " -focused" : "")}
-                  {...inputProps}
-                />
-              )}
-            </DatePicker>
+            
             <button type="submit">vai</button>
           </Form>
         )}

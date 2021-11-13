@@ -30,7 +30,7 @@ export const MutiraoCreate = () => {
     nome: yup.string().required("campo obrigatorio!"),
     objetivos: yup.string().required("campo obrigatorio!"),
     responsavel: yup.string().required("campo obrigatorio!"),
-    data_mutirao: yup.date().required("campo obrigatorio!").nullable(),
+    data_mutirao: yup.date().nullable(),
     requisitos: yup.string().required("campo obrigatorio!"),
     local: yup.string().required("campo obrigatorio!"),
     participantes: yup.string().required("campo obrigatorio!"),

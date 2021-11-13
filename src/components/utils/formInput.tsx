@@ -1,8 +1,5 @@
 import React from "react";
-import DatePicker, { registerLocale } from "react-datepicker";
-import { pt } from 'date-fns/locale';
-registerLocale("pt", pt)
-import "react-datepicker/dist/react-datepicker.css";
+import { DatePicker } from '@orange_digital/chakra-datepicker';
 import { Field } from "formik";
 import {
   Input,
@@ -72,17 +69,7 @@ const FormField = (props: any) => {
                     )}
                   </FormLabel>
                 )}
-                <DatePicker
-                  name={name}
-                  minDate={new Date()}
-                  {...rest}
-                  {...field}
-                  selected={value}
-                  locale="pt"
-                  dateFormat="dd/MM/yy"
-                  onChange={(val) => setFieldValue(name, val)}
-                  className="react-datapicker__input-text"
-                />
+                <DatePicker name={name} {...rest} {...field} initialValue={new Date()} />
                 <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
               </FormControl>
             );
