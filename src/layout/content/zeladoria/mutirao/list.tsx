@@ -95,7 +95,7 @@ export const MutiroesList = (props: any) => {
                 <Button
                   leftIcon={<CheckCircleIcon />}
                   colorScheme="teal"
-                  variant="solid"
+                  variant="outline"
                   me="2"
                   onClick={() => router.push('/zeladoria/mutiroes/create')}
                 >
