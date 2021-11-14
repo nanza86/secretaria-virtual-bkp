@@ -87,10 +87,12 @@ const FormField = (props: any) => {
               <FormControl
                 display="flex"
                 alignItems="center"
-                me="5"
+                mt="5"
+                w="full"
+                justifyContent="flex-end"
               >
                 {label && (
-                  <FormLabel htmlFor={name} mb="0" display={["none","flex"]}>
+                  <FormLabel htmlFor={name} mb="0">
                     {label}{" "}
                     {isRequired && (
                       <Text as="span" textColor="red">

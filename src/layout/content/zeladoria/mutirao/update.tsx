@@ -176,16 +176,6 @@ export const MutiraoUpdateForm = (props: MutiraoProps) => {
                         <ArrowBackIcon />
                       </Button>
                     </Flex>
-                    <Spacer />
-                    <Flex alignItems="center">
-                      <FormField
-                        name="concluido"
-                        label="Concluído"
-                        type="switch"
-                        onChange={handleChange}
-                        isChecked={values.concluido}
-                      />
-                    </Flex>
                     <Flex>
                       <Button
                         leftIcon={<CheckIcon />}
@@ -215,6 +205,14 @@ export const MutiraoUpdateForm = (props: MutiraoProps) => {
                     flexDirection="column"
                     w="full"
                   >
+                    <FormField
+                      name="concluido"
+                      label="Concluído"
+                      type="switch"
+                      onChange={handleChange}
+                      isChecked={values.concluido}
+                    />
+                    <Flex>{values.concluido ? "true" : "false"}</Flex>
                     <FormField
                       name="nome"
                       label="Nome do Mutirão"
