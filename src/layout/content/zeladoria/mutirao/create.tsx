@@ -193,7 +193,7 @@ export const MutiraoCreate = () => {
                       <Flex w="40%">
                         <FormField
                           name="data_mutirao"
-                          label="Data de execução"
+                          label="Data"
                           type="datepicker"
                           min="hoje"
                           isRequired

@@ -244,7 +244,7 @@ export const MutiraoUpdateForm = (props: MutiraoProps) => {
                       <Flex w="40%">
                         <FormField
                           name="data_mutirao"
-                          label="Data de execução"
+                          label="Data"
                           type="datepicker"
                           defaultValue={values.data_mutirao}
                           onChange={handleChange}
