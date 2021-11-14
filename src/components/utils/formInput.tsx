@@ -1,5 +1,6 @@
 import React from "react";
-import { DatePicker } from '@orange_digital/chakra-datepicker';
+import MaskedInput from "react-text-mask";
+import createAutoCorrectedDatePipe from "text-mask-addons/dist/createAutoCorrectedDatePipe";
 import { Field } from "formik";
 import {
   Input,
@@ -9,13 +10,6 @@ import {
   FormLabel,
   FormErrorMessage,
 } from "@chakra-ui/react";
-
-interface dateProps {
-  isClearable?: boolean;
-  onChange: (date: Date) => any;
-  selectedDate: Date | undefined;
-  showPopperArrow?: boolean;
-}
 
 const FormField = (props: any) => {
   const { label, name, isRequired, type, ...rest } = props;
@@ -49,11 +43,13 @@ const FormField = (props: any) => {
       break;
 
     case "datepicker":
+      const autoCorrectedDatePipe = createAutoCorrectedDatePipe('dd/mm/yyyy', {
+        minYear: 2021,
+        maxYear: 2022
+      });
       return (
         <Field name={name}>
           {({ field, form }: any) => {
-            const { setFieldValue } = form;
-            const { value } = field;
             return (
               <FormControl
                 isInvalid={form.errors[name] && form.touched[name]}
@@ -69,7 +65,29 @@ const FormField = (props: any) => {
                     )}
                   </FormLabel>
                 )}
-                <DatePicker name={name} {...rest} {...field} initialValue={new Date()} />
+                <MaskedInput
+                  guide={false}
+                  keepCharPositions={true}
+                  pipe={autoCorrectedDatePipe}
+                  mask={[
+                    /\d/,
+                    /\d/,
+                    "/",
+                    /\d/,
+                    /\d/,
+                    "/",
+                    /\d/,
+                    /\d/,
+                    /\d/,
+                    /\d/,
+                  ]}
+                  {...rest}
+                  {...field}
+                  render={(ref, props) => (
+                    <Input name={name} ref={ref} {...props} />
+                  )}
+                />
+
                 <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
               </FormControl>
             );
