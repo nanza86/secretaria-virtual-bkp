@@ -47,6 +47,7 @@ export const MutiraoCreate = () => {
     requisitos: "",
     local: "",
     participantes: "",
+    concluido: false,
   };
 
   const onSubmit = async (formValues: FormikFormProps) => {
@@ -194,6 +195,7 @@ export const MutiraoCreate = () => {
                           name="data_mutirao"
                           label="Data de execução"
                           type="datepicker"
+                          min="hoje"
                           isRequired
                         />
                       </Flex>

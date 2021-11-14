@@ -12,7 +12,7 @@ datasource db {
 }
 
 model Mutirao {
-  id            String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  id            String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
   nome          String
   objetivos     String
   responsavel   String
@@ -21,4 +21,5 @@ model Mutirao {
   requisitos    String
   local         String
   participantes String
+  concluido     Boolean
 }

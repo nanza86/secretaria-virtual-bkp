@@ -23,10 +23,16 @@ import { Searchbox } from "../../../../components/utils/searchbox";
 import { MobileMenu } from "../../../../components/utils/mobileMenu";
 import { Motion, ItemMotion } from "../../../../components/utils/motion";
 import { format, parseISO, isAfter } from "date-fns";
-import router from "next/router";
+import { useRouter } from "next/router";
 
 export const MutiroesList = (props: any) => {
   const listaMutiroes = props.lista;
+  const router = useRouter();
+
+  const handleClick = (url: any) => {
+    router.push(url);
+  };
+
   return (
     <>
       <HStack
@@ -121,33 +127,38 @@ export const MutiroesList = (props: any) => {
                 </Thead>
                 <Tbody>
                   {listaMutiroes.map((item: any, key: number) => {
-                    const mutiraoAntigo = isAfter(parseISO(item.data_mutirao), new Date());
+                    const mutiraoAntigo = isAfter(
+                      parseISO(item.data_mutirao),
+                      new Date()
+                    );
                     return (
-                      <Tr key={key}>
+                      <Tr
+                        key={key}
+                        onClick={() =>
+                          handleClick("/zeladoria/mutiroes/" + item.id)
+                        }
+                        cursor="pointer"
+                        _hover={{ color: "teal" }}
+                      >
                         <Td>
                           <Tag
                             size="md"
                             borderRadius="full"
                             variant="solid"
-                            bgColor={mutiraoAntigo? "teal.400": "gray"}
+                            bgColor={mutiraoAntigo ? "teal.400" : "gray"}
                           >
-                            <Link href={"/zeladoria/mutiroes/" + item.id}>
-                              {format(parseISO(item.data_mutirao), "dd/MM/yy")}
-                            </Link>
+                            {format(parseISO(item.data_mutirao), "dd/MM/yy")}
                           </Tag>
                         </Td>
                         <Td whiteSpace="nowrap">
-                          <Link href={"/zeladoria/mutiroes/" + item.id}>
-                            {item.nome}
-                          </Link>
-                        </Td>
+                          {item.concluido && <CheckCircleIcon me="2" color="teal.300" />}
+                          {item.nome}
+                          </Td>
                         <Td
                           whiteSpace="nowrap"
                           display={["none", "none", "none", "table-cell"]}
                         >
-                          <Link href={"/zeladoria/mutiroes/" + item.id}>
-                            {item.responsavel}
-                          </Link>
+                          {item.responsavel}
                         </Td>
                         <Td display={["none", "none", "none", "table-cell"]}>
                           <AvatarGroup size="sm" max={3}>
@@ -174,7 +185,8 @@ export const MutiroesList = (props: any) => {
                           </AvatarGroup>
                         </Td>
                       </Tr>
-                  )})}
+                    );
+                  })}
                 </Tbody>
               </Table>
             </Flex>

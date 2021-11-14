@@ -6,12 +6,13 @@ import {
   Text,
   FormControl,
   FormLabel,
+  Switch,
   FormErrorMessage,
 } from "@chakra-ui/react";
 import { format } from "date-fns";
 
 const FormField = (props: any) => {
-  const { label, name, isRequired, type, ...rest } = props;
+  const { label, name, isRequired, type, min, ...rest } = props;
   const hoje = format(new Date(), "yyyy-MM-dd");
 
   switch (type) {
@@ -67,10 +68,38 @@ const FormField = (props: any) => {
                   name={name}
                   {...rest}
                   {...field}
-                  min={hoje}
+                  min={min&&hoje}
                   max="2023-12-31"
                 />
                 <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
+              </FormControl>
+            );
+          }}
+        </Field>
+      );
+      break;
+
+    case "switch":
+      return (
+        <Field name={name}>
+          {({ field, form }: any) => {
+            return (
+              <FormControl
+                display="flex"
+                alignItems="center"
+                me="5"
+              >
+                {label && (
+                  <FormLabel htmlFor={name} mb="0">
+                    {label}{" "}
+                    {isRequired && (
+                      <Text as="span" textColor="red">
+                        *
+                      </Text>
+                    )}
+                  </FormLabel>
+                )}
+                <Switch id={name} name={name} {...rest} {...field} />
               </FormControl>
             );
           }}

@@ -5,16 +5,7 @@ import {
   Box,
   Button,
   Divider,
-  Input,
-  Textarea,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-  Tag,
   useToast,
-  Avatar,
-  TagLabel,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -23,6 +14,7 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  Spacer,
 } from "@chakra-ui/react";
 import { ArrowBackIcon, CheckIcon, DeleteIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
@@ -184,6 +176,16 @@ export const MutiraoUpdateForm = (props: MutiraoProps) => {
                         <ArrowBackIcon />
                       </Button>
                     </Flex>
+                    <Spacer />
+                    <Flex alignItems="center">
+                      <FormField
+                        name="concluido"
+                        label="Concluído"
+                        type="switch"
+                        onChange={handleChange}
+                        isChecked={values.concluido}
+                      />
+                    </Flex>
                     <Flex>
                       <Button
                         leftIcon={<CheckIcon />}
@@ -213,14 +215,20 @@ export const MutiraoUpdateForm = (props: MutiraoProps) => {
                     flexDirection="column"
                     w="full"
                   >
-                    <FormField name="nome" label="Nome do Mutirão" isRequired />
+                    <FormField
+                      name="nome"
+                      label="Nome do Mutirão"
+                      isRequired
+                      disabled={values.concluido ? true : false}
+                    />
                     <FormField
                       name="objetivos"
                       label="Objetivos"
                       type="textarea"
-                      defaultValue={values.nome}
+                      defaultValue={values.objetivos}
                       onChange={handleChange}
                       isRequired
+                      disabled={values.concluido ? true : false}
                     />
                     <Flex w="100%">
                       <Flex me="5" w="60%">
@@ -230,6 +238,7 @@ export const MutiraoUpdateForm = (props: MutiraoProps) => {
                           defaultValue={values.responsavel}
                           onChange={handleChange}
                           isRequired
+                          disabled={values.concluido ? true : false}
                         />
                       </Flex>
                       <Flex w="40%">
@@ -240,6 +249,7 @@ export const MutiraoUpdateForm = (props: MutiraoProps) => {
                           defaultValue={values.data_mutirao}
                           onChange={handleChange}
                           isRequired
+                          disabled={values.concluido ? true : false}
                         />
                       </Flex>
                     </Flex>
@@ -250,8 +260,14 @@ export const MutiraoUpdateForm = (props: MutiraoProps) => {
                       defaultValue={values.requisitos}
                       onChange={handleChange}
                       isRequired
+                      disabled={values.concluido ? true : false}
                     />
-                    <FormField name="local" label="Local" isRequired />
+                    <FormField
+                      name="local"
+                      label="Local"
+                      isRequired
+                      disabled={values.concluido ? true : false}
+                    />
                     <FormField
                       name="participantes"
                       label="Participantes Confirmados"
@@ -259,6 +275,7 @@ export const MutiraoUpdateForm = (props: MutiraoProps) => {
                       defaultValue={values.participantes}
                       onChange={handleChange}
                       isRequired
+                      disabled={values.concluido ? true : false}
                     />
                   </HStack>
                   <Modal isOpen={isOpen} onClose={onClose}>
