@@ -42,7 +42,7 @@ const FormField = (props: any) => {
       );
       break;
 
-    case "datepicker":
+    case "date":
       const autoCorrectedDatePipe = createAutoCorrectedDatePipe('dd/mm/yyyy', {
         minYear: 2021,
         maxYear: 2022
@@ -84,7 +84,7 @@ const FormField = (props: any) => {
                   {...rest}
                   {...field}
                   render={(ref, props) => (
-                    <Input name={name} ref={ref} {...props} />
+                    <Input name={name} ref:any={ref} {...props} />
                   )}
                 />
 
