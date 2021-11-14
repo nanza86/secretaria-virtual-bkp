@@ -5,6 +5,7 @@ import {
   Box,
   Button,
   Divider,
+  useToast,
   Input,
   Textarea,
   FormControl,
@@ -25,12 +26,13 @@ import { useState } from "react";
 export const MutiraoCreate = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const toast = useToast();
 
   const validateSchema = yup.object().shape({
     nome: yup.string().required("campo obrigatorio!"),
     objetivos: yup.string().required("campo obrigatorio!"),
     responsavel: yup.string().required("campo obrigatorio!"),
-    data_mutirao: yup.string().min(10,"Data Incorreta").required("Campo obrigatório"),
+    data_mutirao: yup.date().required("Campo obrigatório"),
     requisitos: yup.string().required("campo obrigatorio!"),
     local: yup.string().required("campo obrigatorio!"),
     participantes: yup.string().required("campo obrigatorio!"),
@@ -62,10 +64,21 @@ export const MutiraoCreate = () => {
       throw new Error(postData.statusText);
     } else {
       setLoading(false);
+      ToastFeedback("Mutirão cadastrado com sucesso!", "success");
       router.back();
     }
   };
-
+  const ToastFeedback = (
+    title: string,
+    statuses: "success" | "error" | "warning" | "info"
+  ) => {
+    toast({
+      title: title,
+      position: "bottom-right",
+      status: statuses,
+      isClosable: true,
+    });
+  };
   return (
     <>
       <HStack
@@ -191,11 +204,7 @@ export const MutiraoCreate = () => {
                       type="textarea"
                       isRequired
                     />
-                    <FormField
-                      name="local"
-                      label="Local"
-                      isRequired
-                    />
+                    <FormField name="local" label="Local" isRequired />
                     <FormField
                       name="participantes"
                       label="Participantes Confirmados"

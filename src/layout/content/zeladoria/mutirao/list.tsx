@@ -22,6 +22,7 @@ import { AvatarAccount } from "../../../../components/utils/avatar";
 import { Searchbox } from "../../../../components/utils/searchbox";
 import { MobileMenu } from "../../../../components/utils/mobileMenu";
 import { Motion, ItemMotion } from "../../../../components/utils/motion";
+import { format, parseISO, isAfter } from "date-fns";
 import router from "next/router";
 
 export const MutiroesList = (props: any) => {
@@ -97,7 +98,7 @@ export const MutiroesList = (props: any) => {
                   colorScheme="teal"
                   variant="outline"
                   me="2"
-                  onClick={() => router.push('/zeladoria/mutiroes/create')}
+                  onClick={() => router.push("/zeladoria/mutiroes/create")}
                 >
                   Cadastrar Novo Mutirão
                 </Button>
@@ -119,61 +120,61 @@ export const MutiroesList = (props: any) => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {listaMutiroes.map((item: any, key: number) => (
-                    <Tr key={key}>
-                      <Td>
-                        <Tag
-                          size="md"
-                          borderRadius="full"
-                          variant="solid"
-                          fontWeight="bold"
-                          bgColor="teal.300"
+                  {listaMutiroes.map((item: any, key: number) => {
+                    const mutiraoAntigo = isAfter(parseISO(item.data_mutirao), new Date());
+                    return (
+                      <Tr key={key}>
+                        <Td>
+                          <Tag
+                            size="md"
+                            borderRadius="full"
+                            variant="solid"
+                            bgColor={mutiraoAntigo? "teal.400": "gray"}
+                          >
+                            <Link href={"/zeladoria/mutiroes/" + item.id}>
+                              {format(parseISO(item.data_mutirao), "dd/MM/yy")}
+                            </Link>
+                          </Tag>
+                        </Td>
+                        <Td whiteSpace="nowrap">
+                          <Link href={"/zeladoria/mutiroes/" + item.id}>
+                            {item.nome}
+                          </Link>
+                        </Td>
+                        <Td
+                          whiteSpace="nowrap"
+                          display={["none", "none", "none", "table-cell"]}
                         >
-                        <Link href={"/zeladoria/mutiroes/" + item.id}>
-                          {item.data_mutirao}
-                        </Link>
-                        </Tag>
-                      </Td>
-                      <Td whiteSpace="nowrap" fontWeight="bold">
-                        <Link href={"/zeladoria/mutiroes/" + item.id}>
-                          {item.nome}
-                        </Link>
-                      </Td>
-                      <Td
-                        whiteSpace="nowrap"
-                        display={["none", "none", "none", "table-cell"]}
-                        fontWeight="bold"
-                      >
-                      <Link href={"/zeladoria/mutiroes/" + item.id}>
-                        {item.responsavel}
-                      </Link>
-                      </Td>
-                      <Td display={["none", "none", "none", "table-cell"]}>
-                        <AvatarGroup size="sm" max={3}>
-                          <Avatar
-                            name="Ryan Florence"
-                            src="https://bit.ly/ryan-florence"
-                          />
-                          <Avatar
-                            name="Segun Adebayo"
-                            src="https://bit.ly/sage-adebayo"
-                          />
-                          <Avatar
-                            name="Kent Dodds"
-                            src="https://bit.ly/kent-c-dodds"
-                          />
-                          <Avatar
-                            name="Prosper Otemuyiwa"
-                            src="https://bit.ly/prosper-baba"
-                          />
-                          <Avatar
-                            name="Christian Nwamba"
-                            src="https://bit.ly/code-beast"
-                          />
-                        </AvatarGroup>
-                      </Td>
-                    </Tr>
-                  ))}
+                          <Link href={"/zeladoria/mutiroes/" + item.id}>
+                            {item.responsavel}
+                          </Link>
+                        </Td>
+                        <Td display={["none", "none", "none", "table-cell"]}>
+                          <AvatarGroup size="sm" max={3}>
+                            <Avatar
+                              name="Ryan Florence"
+                              src="https://bit.ly/ryan-florence"
+                            />
+                            <Avatar
+                              name="Segun Adebayo"
+                              src="https://bit.ly/sage-adebayo"
+                            />
+                            <Avatar
+                              name="Kent Dodds"
+                              src="https://bit.ly/kent-c-dodds"
+                            />
+                            <Avatar
+                              name="Prosper Otemuyiwa"
+                              src="https://bit.ly/prosper-baba"
+                            />
+                            <Avatar
+                              name="Christian Nwamba"
+                              src="https://bit.ly/code-beast"
+                            />
+                          </AvatarGroup>
+                        </Td>
+                      </Tr>
+                  )})}
                 </Tbody>
               </Table>
             </Flex>

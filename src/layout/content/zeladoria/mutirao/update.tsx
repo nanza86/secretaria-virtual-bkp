@@ -26,12 +26,14 @@ import {
 } from "@chakra-ui/react";
 import { ArrowBackIcon, CheckIcon, DeleteIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
-import { useFormik } from "formik";
+import { Formik, Form, FormikFormProps, FormikValues } from "formik";
 import { Breadcrumbs } from "../../../../components/utils/breadcrumb";
 import { AvatarAccount } from "../../../../components/utils/avatar";
 import { Searchbox } from "../../../../components/utils/searchbox";
 import { MobileMenu } from "../../../../components/utils/mobileMenu";
 import { Motion, ItemMotion } from "../../../../components/utils/motion";
+import FormField from "../../../../components/utils/formInput";
+import * as yup from "yup";
 import { useState } from "react";
 
 interface MutiraoProps {
@@ -46,34 +48,42 @@ export const MutiraoUpdateForm = (props: MutiraoProps) => {
   const router = useRouter();
   const toast = useToast();
 
-  const formik = useFormik({
-    initialValues: { ...data },
-    onSubmit: async (formValues) => {
-      setLoading(true);
-      const urlApi = "/api/zeladoria/mutirao/" + formValues.id + "/update";
-      const deleteId = formValues;
-      delete deleteId["id"];
-
-      const postData = await fetch(urlApi, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(deleteId),
-      });
-      if (!postData.ok) {
-        throw new Error(postData.statusText);
-      } else {
-        setLoading(false);
-        ToastFeedback("Mutirão atualizado com sucesso!", "success");
-      }
-      return await postData.json();
-    },
+  const validateSchema = yup.object().shape({
+    nome: yup.string().required("campo obrigatorio!"),
+    objetivos: yup.string().required("campo obrigatorio!"),
+    responsavel: yup.string().required("campo obrigatorio!"),
+    data_mutirao: yup.date().required("Campo obrigatório"),
+    requisitos: yup.string().required("campo obrigatorio!"),
+    local: yup.string().required("campo obrigatorio!"),
+    participantes: yup.string().required("campo obrigatorio!"),
   });
+
+  const onSubmit = async (formValues: FormikValues) => {
+    console.log(formValues);
+    setLoading(true);
+    const urlApi = "/api/zeladoria/mutirao/" + formValues.id + "/update";
+    const deleteId = formValues;
+    delete deleteId["id"];
+
+    const postData = await fetch(urlApi, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(deleteId),
+    });
+    if (!postData.ok) {
+      throw new Error(postData.statusText);
+    } else {
+      setLoading(false);
+      ToastFeedback("Mutirão atualizado com sucesso!", "success");
+    }
+    return await postData.json();
+  };
+
   const deleteMutirao = async (idMutirao: any) => {
     setDeleting(true);
     const urlApi = "/api/zeladoria/mutirao/" + idMutirao + "/delete";
-    console.log(urlApi);
 
     const postData = await fetch(urlApi, {
       method: "POST",
@@ -85,6 +95,7 @@ export const MutiraoUpdateForm = (props: MutiraoProps) => {
       throw new Error(postData.statusText);
     } else {
       setLoading(false);
+      ToastFeedback("Mutirão excluido com sucesso!", "error");
       router.back();
     }
   };
@@ -154,177 +165,135 @@ export const MutiraoUpdateForm = (props: MutiraoProps) => {
       <Motion initial={ItemMotion.hidden} animate={ItemMotion.visible}>
         <HStack px={["5", "0"]} pr={["5", "5"]} pb={5} w="full">
           <Box p={5} shadow="base" w="100%" borderRadius="md" bgColor="white">
-            <form onSubmit={formik.handleSubmit}>
-              <HStack justifyContent="space-between">
-                <Flex>
-                  <Button
-                    onClick={() => router.back()}
-                    colorScheme="gray"
-                    variant="outline"
+            <Formik
+              initialValues={{ ...data }}
+              validationSchema={validateSchema}
+              onSubmit={(values: any) => {
+                onSubmit(values);
+              }}
+            >
+              {({ errors, touched, values, handleChange }) => (
+                <Form>
+                  <HStack justifyContent="space-between">
+                    <Flex>
+                      <Button
+                        onClick={() => router.back()}
+                        colorScheme="gray"
+                        variant="outline"
+                      >
+                        <ArrowBackIcon />
+                      </Button>
+                    </Flex>
+                    <Flex>
+                      <Button
+                        leftIcon={<CheckIcon />}
+                        colorScheme="green"
+                        variant="outline"
+                        me="2"
+                        type="submit"
+                        isLoading={loading}
+                        loadingText="Salvando"
+                      >
+                        Salvar
+                      </Button>
+                      <Button
+                        leftIcon={<DeleteIcon h="4" />}
+                        colorScheme="red"
+                        variant="outline"
+                        onClick={onOpen}
+                      >
+                        Excluir
+                      </Button>
+                    </Flex>
+                  </HStack>
+                  <Divider my="4" />
+                  <HStack
+                    justifyContent="flex-start"
+                    alignItems="flex-start"
+                    flexDirection="column"
+                    w="full"
                   >
-                    <ArrowBackIcon />
-                  </Button>
-                </Flex>
-                <Flex>
-                  <Button
-                    leftIcon={<CheckIcon />}
-                    colorScheme="green"
-                    variant="outline"
-                    me="2"
-                    type="submit"
-                    isLoading={loading}
-                    loadingText="Salvando"
-                  >
-                    Salvar
-                  </Button>
-                  <Button
-                    leftIcon={<DeleteIcon h="4" />}
-                    colorScheme="red"
-                    variant="outline"
-                    onClick={onOpen}
-                  >
-                    Excluir
-                  </Button>
-                </Flex>
-              </HStack>
-              <Divider my="4" />
-              <HStack
-                justifyContent="flex-start"
-                alignItems="flex-start"
-                flexDirection="column"
-                w="full"
-              >
-                <FormControl id="nome" pb="5">
-                  <FormLabel fontWeight="semibold">Nome do mutirão:</FormLabel>
-                  <Input
-                    name="nome"
-                    defaultValue={formik.values.nome}
-                    onChange={formik.handleChange}
-                  />
-                </FormControl>
-                <FormControl id="objetivos" pb="5">
-                  <FormLabel fontWeight="semibold">Objetivos:</FormLabel>
-                  <Textarea
-                    defaultValue={formik.values.objetivos}
-                    onChange={formik.handleChange}
-                  ></Textarea>
-                </FormControl>
-                <Flex w="100%">
-                  <Flex me="5" w="60%">
-                    <FormControl id="responsavel" pb="5">
-                      <FormLabel fontWeight="semibold">Responsável:</FormLabel>
-                      <Input
-                        defaultValue={formik.values.responsavel}
-                        onChange={formik.handleChange}
-                      />
-                    </FormControl>
-                  </Flex>
-                  <Flex w="40%">
-                    <FormControl id="data_mutirao" pb="5">
-                      <FormLabel fontWeight="semibold">Data: </FormLabel>
-                      <Input
-                        defaultValue={formik.values.data_mutirao}
-                        onChange={formik.handleChange}
-                      />
-                    </FormControl>
-                  </Flex>
-                </Flex>
-                <FormControl id="requisitos" pb="5">
-                  <FormLabel fontWeight="semibold">Requisitos:</FormLabel>
-                  <Textarea
-                    defaultValue={formik.values.requisitos}
-                    onChange={formik.handleChange}
-                  ></Textarea>
-                </FormControl>
-                <FormControl id="local" pb="5">
-                  <FormLabel fontWeight="semibold">Local:</FormLabel>
-                  <Input
-                    defaultValue={formik.values.local}
-                    onChange={formik.handleChange}
-                  />
-                </FormControl>
-                <FormControl id="nome" pb="5">
-                  <FormLabel fontWeight="semibold">
-                    Participantes confirmados:
-                  </FormLabel>
-                  <Tag size="lg" m="1" colorScheme="blue" borderRadius="full">
-                    <Avatar
-                      src="https://bit.ly/sage-adebayo"
-                      size="sm"
-                      name="Segun Adebayo"
-                      my="2"
-                      ml={-1}
-                      mr={2}
+                    <FormField name="nome" label="Nome do Mutirão" isRequired />
+                    <FormField
+                      name="objetivos"
+                      label="Objetivos"
+                      type="textarea"
+                      defaultValue={values.nome}
+                      onChange={handleChange}
+                      isRequired
                     />
-                    <TagLabel>Segun Adebayo</TagLabel>
-                  </Tag>
-                  <Tag size="lg" m="1" colorScheme="blue" borderRadius="full">
-                    <Avatar
-                      name="Ryan Florence"
-                      src="https://bit.ly/ryan-florence"
-                      size="sm"
-                      my="2"
-                      ml={-1}
-                      mr={2}
+                    <Flex w="100%">
+                      <Flex me="5" w="60%">
+                        <FormField
+                          name="responsavel"
+                          label="Responsável"
+                          defaultValue={values.responsavel}
+                          onChange={handleChange}
+                          isRequired
+                        />
+                      </Flex>
+                      <Flex w="40%">
+                        <FormField
+                          name="data_mutirao"
+                          label="Data de execução"
+                          type="datepicker"
+                          defaultValue={values.data_mutirao}
+                          onChange={handleChange}
+                          isRequired
+                        />
+                      </Flex>
+                    </Flex>
+                    <FormField
+                      name="requisitos"
+                      label="Requisitos"
+                      type="textarea"
+                      defaultValue={values.requisitos}
+                      onChange={handleChange}
+                      isRequired
                     />
-                    <TagLabel>Ryan Florence</TagLabel>
-                  </Tag>
-                  <Tag size="lg" m="1" colorScheme="blue" borderRadius="full">
-                    <Avatar
-                      name="Prosper Otemuyiwa"
-                      src="https://bit.ly/prosper-baba"
-                      size="sm"
-                      my="2"
-                      ml={-1}
-                      mr={2}
+                    <FormField name="local" label="Local" isRequired />
+                    <FormField
+                      name="participantes"
+                      label="Participantes Confirmados"
+                      type="textarea"
+                      defaultValue={values.participantes}
+                      onChange={handleChange}
+                      isRequired
                     />
-                    <TagLabel>Prosper Otemuyiwa</TagLabel>
-                  </Tag>
-                  <Tag size="lg" m="1" colorScheme="blue" borderRadius="full">
-                    <Avatar
-                      name="Kent Dodds"
-                      src="https://bit.ly/kent-c-dodds"
-                      size="sm"
-                      my="2"
-                      ml={-1}
-                      mr={2}
-                    />
-                    <TagLabel>Kent Dodds</TagLabel>
-                  </Tag>
-                </FormControl>
-              </HStack>
-            </form>
+                  </HStack>
+                  <Modal isOpen={isOpen} onClose={onClose}>
+                    <ModalOverlay />
+                    <ModalContent>
+                      <ModalHeader>Excluir Mutirão</ModalHeader>
+                      <ModalCloseButton />
+                      <ModalBody>
+                        Você tem certeza que deseja excluir esse mutirão?
+                      </ModalBody>
+
+                      <ModalFooter>
+                        <Button colorScheme="blue" mr={3} onClick={onClose}>
+                          Cancelar
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          colorScheme="red"
+                          isLoading={deleting}
+                          loadingText="Excluindo"
+                          onClick={() => {
+                            deleteMutirao(values.id);
+                          }}
+                        >
+                          Quero Excluir
+                        </Button>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
+                </Form>
+              )}
+            </Formik>
           </Box>
         </HStack>
       </Motion>
-
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Excluir Mutirão</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            Você tem certeza que deseja excluir esse mutirão?
-          </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Cancelar
-            </Button>
-            <Button
-              variant="ghost"
-              colorScheme="red"
-              isLoading={deleting}
-              loadingText="Excluindo"
-              onClick={() => {
-                deleteMutirao(formik.values.id);
-              }}
-            >
-              Quero Excluir
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
     </>
   );
 };
