@@ -85,7 +85,7 @@ const FormField = (props: any) => {
                   {...field}
                   render={(ref, props) => (
                     // @ts-expect-error
-                    <Input name={name} ref={ref} {...props} />
+                    <Input type="number" name={name} ref={ref} {...props} />
                   )}
                 />
 
