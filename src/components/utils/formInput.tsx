@@ -43,9 +43,9 @@ const FormField = (props: any) => {
       break;
 
     case "date":
-      const autoCorrectedDatePipe = createAutoCorrectedDatePipe('dd/mm/yyyy', {
+      const autoCorrectedDatePipe = createAutoCorrectedDatePipe("dd/mm/yyyy", {
         minYear: 2021,
-        maxYear: 2022
+        maxYear: 2022,
       });
       return (
         <Field name={name}>
@@ -85,10 +85,45 @@ const FormField = (props: any) => {
                   {...field}
                   render={(ref, props) => (
                     // @ts-expect-error
-                    <Input type="number" name={name} ref={ref} {...props} />
+                    <Input name={name} ref={ref} {...props} />
                   )}
                 />
 
+                <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
+              </FormControl>
+            );
+          }}
+        </Field>
+      );
+      break;
+
+    case "datepicker":
+      return (
+        <Field name={name}>
+          {({ field, form }: any) => {
+            return (
+              <FormControl
+                isInvalid={form.errors[name] && form.touched[name]}
+                style={{ paddingBottom: "1em" }}
+              >
+                {label && (
+                  <FormLabel htmlFor={name}>
+                    {label}{" "}
+                    {isRequired && (
+                      <Text as="span" textColor="red">
+                        *
+                      </Text>
+                    )}
+                  </FormLabel>
+                )}
+                <Input
+                  type="date"
+                  name={name}
+                  {...rest}
+                  {...field}
+                  min="2021-01-01"
+                  max="2023-12-31"
+                />
                 <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
               </FormControl>
             );

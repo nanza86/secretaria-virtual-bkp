@@ -180,7 +180,7 @@ export const MutiraoCreate = () => {
                         <FormField
                           name="data_mutirao"
                           label="Data de execução"
-                          type="date"
+                          type="datepicker"
                           isRequired
                         />
                       </Flex>
