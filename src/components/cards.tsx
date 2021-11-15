@@ -29,7 +29,6 @@ import {
   RiUserStarLine,
 } from "react-icons/ri";
 import IconBox from "./utils/iconBox";
-import EllipsisText from "react-ellipsis-text";
 import { useRouter } from "next/router";
 
 /** Card Trabalhos */
@@ -316,6 +315,14 @@ interface mutiraoProps {
   concluido: boolean;
   antigo: boolean;
 }
+type Truncate = {
+  longTextWrapper: HTMLElement;
+  longText: string;
+  lines: number;
+  truncFrom: "start" | "middle" | "end";
+  ellipsis: string;
+  wrapperOffset: number;
+};
 
 export const CardMutirao = (props: mutiraoProps) => {
   return (
@@ -341,7 +348,7 @@ export const CardMutirao = (props: mutiraoProps) => {
         Objetivos
       </Heading>
       <Text fontSize="sm">
-        <EllipsisText text={props.descricao} length={"80"} />
+        {props.descricao}
       </Text>
       <Divider my="3" />
       <Heading as="h5" fontSize="xs" color="gray.400">
