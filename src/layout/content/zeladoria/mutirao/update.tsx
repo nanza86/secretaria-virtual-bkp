@@ -205,6 +205,7 @@ export const MutiraoUpdateForm = (props: MutiraoProps) => {
                     alignItems="flex-start"
                     flexDirection="column"
                     w="full"
+                    pe="5"
                   >
                     <FormField
                       name="concluido"
@@ -219,9 +220,8 @@ export const MutiraoUpdateForm = (props: MutiraoProps) => {
                       isRequired
                       disabled={values.concluido ? true : false}
                     />
-
-                    <Flex w="100%">
-                      <Flex me="5" w="50%">
+                    <Flex w="100%" wrap={["wrap", "wrap", "nowrap"]}>
+                      <Flex me={["0", "5"]} w={["100%", "100%", "50%"]}>
                         <FormField
                           name="descricao"
                           label="Descrição"
@@ -232,7 +232,7 @@ export const MutiraoUpdateForm = (props: MutiraoProps) => {
                           disabled={values.concluido ? true : false}
                         />
                       </Flex>
-                      <Flex me="5" w="50%">
+                      <Flex w={["100%", "100%", "50%"]}>
                         <FormField
                           name="objetivos"
                           label="Objetivos"

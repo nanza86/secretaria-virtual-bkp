@@ -176,11 +176,12 @@ export const MutiraoCreate = () => {
                     justifyContent="flex-start"
                     alignItems="flex-start"
                     flexDirection="column"
-                    w="full" pe="5"
+                    w="full"
+                    pe="5"
                   >
                     <FormField name="nome" label="Nome do Mutirão" isRequired />
-                    <Flex w="100%" wrap={["wrap","wrap","nowrap"]}>
-                      <Flex me={["0","5"]} w={["100%","100%","50%"]}>
+                    <Flex w="100%" wrap={["wrap", "wrap", "nowrap"]}>
+                      <Flex me={["0", "5"]} w={["100%", "100%", "50%"]}>
                         <FormField
                           name="descricao"
                           label="Descricao"
@@ -188,7 +189,7 @@ export const MutiraoCreate = () => {
                           isRequired
                         />
                       </Flex>
-                      <Flex w={["100%","100%","50%"]}>
+                      <Flex w={["100%", "100%", "50%"]}>
                         <FormField
                           name="objetivos"
                           label="Objetivos"
