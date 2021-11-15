@@ -327,7 +327,7 @@ export const CardMutirao = (props: mutiraoProps) => {
       }}
       w="100%"
       borderRadius="md"
-      bgGradient="linear(to-t, gray.50 10%, rgba(255,255,255,0) 50%)"
+      bgGradient="linear(to-t, gray.50 10%, rgba(255,255,255,0) 100%)"
     >
       <Flex alignItems="center">
         <Heading fontSize="md">
