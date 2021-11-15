@@ -11,17 +11,26 @@ import {
   Tr,
   Td,
   Divider,
+  Tag,
+  TagLabel,
+  TagLeftIcon,
+  AvatarGroup,
+  background,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
+import { CalendarIcon, CheckCircleIcon } from "@chakra-ui/icons";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 import { FaStarOfDavid, FaEye } from "react-icons/fa";
 import {
   RiCake2Line,
   RiBookOpenLine,
   RiArrowRightCircleFill,
+  RiUserStarLine,
 } from "react-icons/ri";
 import IconBox from "./utils/iconBox";
+import EllipsisText from "react-ellipsis-text";
+import { useRouter } from "next/router";
 
 /** Card Trabalhos */
 interface trabalhosProps {
@@ -146,7 +155,20 @@ export const CardPresenca = (props: presencaProps) => {
       curve: "smooth",
     },
     xaxis: {
-      categories: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+      categories: [
+        "Jan",
+        "Fev",
+        "Mar",
+        "Abr",
+        "Mai",
+        "Jun",
+        "Jul",
+        "Ago",
+        "Set",
+        "Out",
+        "Nov",
+        "Dez",
+      ],
     },
   };
   const [options, setOptions] = useState(opttionsType);
@@ -163,11 +185,37 @@ export const CardPresenca = (props: presencaProps) => {
     const dados = [
       {
         name: "Fardados",
-        data: [ram(), ram(), ram(), ram(), ram(), ram(), ram(), ram(), ram(), ram(), ram(), ram()],
+        data: [
+          ram(),
+          ram(),
+          ram(),
+          ram(),
+          ram(),
+          ram(),
+          ram(),
+          ram(),
+          ram(),
+          ram(),
+          ram(),
+          ram(),
+        ],
       },
       {
         name: "Visitantes",
-        data: [ram(), ram(), ram(), ram(), ram(), ram(), ram(), ram(), ram(), ram(), ram(), ram()],
+        data: [
+          ram(),
+          ram(),
+          ram(),
+          ram(),
+          ram(),
+          ram(),
+          ram(),
+          ram(),
+          ram(),
+          ram(),
+          ram(),
+          ram(),
+        ],
       },
     ];
     setSeries(dados);
@@ -259,10 +307,14 @@ export const CardOrquidario = () => {
   );
 };
 
-
 /** Card Mutirão */
 interface mutiraoProps {
-  dados?: any[];
+  nome: string;
+  descricao: string;
+  data: string;
+  responsavel: string;
+  concluido: boolean;
+  antigo: boolean;
 }
 
 export const CardMutirao = (props: mutiraoProps) => {
@@ -270,17 +322,67 @@ export const CardMutirao = (props: mutiraoProps) => {
     <Box
       p={5}
       shadow="base"
+      _hover={{
+        boxShadow: "md",
+      }}
       w="100%"
-      minH="220px"
       borderRadius="md"
-      bgColor="white"
+      bgGradient="linear(to-t, gray.50 10%, rgba(255,255,255,0) 50%)"
     >
       <Flex alignItems="center">
-        <Heading fontSize="md" color="gray.400" whiteSpace="nowrap">
-          Agrofloresta
+        <Heading fontSize="md">
+          {props.concluido && <CheckCircleIcon me="2" color="teal.300" />}
+          {props.nome}
         </Heading>
+        <Flex></Flex>
       </Flex>
-      <Divider mt="3" /> 
+      <Divider my="3" />
+      <Heading as="h5" fontSize="xs" mb="1" color="gray.400">
+        Objetivos
+      </Heading>
+      <Text fontSize="sm">
+        <EllipsisText text={props.descricao} length={"80"} />
+      </Text>
+      <Divider my="3" />
+      <Heading as="h5" fontSize="xs" color="gray.400">
+        Data do Mutirão / Responsável
+      </Heading>
+      <Tag
+        size="md"
+        bgColor="white"
+        color={props.antigo ? "teal.400" : "gray"}
+        variant="solid"
+        me="2"
+        mt="3"
+      >
+        <TagLeftIcon as={CalendarIcon} />
+        <TagLabel fontSize="sm">{props.data}</TagLabel>
+      </Tag>
+      <Tag size="md" bgColor="white" color="gray" variant="solid" mt="3">
+        <TagLeftIcon as={RiUserStarLine} />
+        <TagLabel fontSize="sm">{props.responsavel}</TagLabel>
+      </Tag>
+      <Divider my="3" />
+      <Heading as="h5" fontSize="xs" color="gray.400" mb="3">
+        Participantes Confirmados
+      </Heading>
+      <AvatarGroup size="md" max={5}>
+        <Avatar name="Ryan Florence" src="https://bit.ly/ryan-florence" />
+        <Avatar name="Segun Adebayo" src="https://bit.ly/sage-adebayo" />
+        <Avatar name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />
+        <Avatar name="Prosper Otemuyiwa" src="https://bit.ly/prosper-baba" />
+        <Avatar name="Christian Nwamba" src="https://bit.ly/code-beast" />
+        <Avatar name="Ryan Florence" src="https://bit.ly/ryan-florence" />
+        <Avatar name="Segun Adebayo" src="https://bit.ly/sage-adebayo" />
+        <Avatar name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />
+        <Avatar name="Prosper Otemuyiwa" src="https://bit.ly/prosper-baba" />
+        <Avatar name="Christian Nwamba" src="https://bit.ly/code-beast" />
+        <Avatar name="Ryan Florence" src="https://bit.ly/ryan-florence" />
+        <Avatar name="Segun Adebayo" src="https://bit.ly/sage-adebayo" />
+        <Avatar name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />
+        <Avatar name="Prosper Otemuyiwa" src="https://bit.ly/prosper-baba" />
+        <Avatar name="Christian Nwamba" src="https://bit.ly/code-beast" />
+      </AvatarGroup>
     </Box>
   );
 };

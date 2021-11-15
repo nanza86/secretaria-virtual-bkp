@@ -43,6 +43,7 @@ export const MutiraoUpdateForm = (props: MutiraoProps) => {
   const validateSchema = yup.object().shape({
     nome: yup.string().required("campo obrigatorio!"),
     objetivos: yup.string().required("campo obrigatorio!"),
+    descricao: yup.string().required("campo obrigatorio!"),
     responsavel: yup.string().required("campo obrigatorio!"),
     data_mutirao: yup.date().required("Campo obrigatório"),
     requisitos: yup.string().required("campo obrigatorio!"),
@@ -212,22 +213,37 @@ export const MutiraoUpdateForm = (props: MutiraoProps) => {
                       onChange={handleChange}
                       isChecked={values.concluido}
                     />
-                    <Flex>{values.concluido ? "true" : "false"}</Flex>
                     <FormField
                       name="nome"
                       label="Nome do Mutirão"
                       isRequired
                       disabled={values.concluido ? true : false}
                     />
-                    <FormField
-                      name="objetivos"
-                      label="Objetivos"
-                      type="textarea"
-                      defaultValue={values.objetivos}
-                      onChange={handleChange}
-                      isRequired
-                      disabled={values.concluido ? true : false}
-                    />
+
+                    <Flex w="100%">
+                      <Flex me="5" w="50%">
+                        <FormField
+                          name="descricao"
+                          label="Descrição"
+                          type="textarea"
+                          defaultValue={values.descricao}
+                          onChange={handleChange}
+                          isRequired
+                          disabled={values.concluido ? true : false}
+                        />
+                      </Flex>
+                      <Flex me="5" w="50%">
+                        <FormField
+                          name="objetivos"
+                          label="Objetivos"
+                          type="textarea"
+                          defaultValue={values.objetivos}
+                          onChange={handleChange}
+                          isRequired
+                          disabled={values.concluido ? true : false}
+                        />
+                      </Flex>
+                    </Flex>
                     <Flex w="100%">
                       <Flex me="5" w="60%">
                         <FormField

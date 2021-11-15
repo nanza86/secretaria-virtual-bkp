@@ -10,6 +10,7 @@ import {
   Textarea,
   FormControl,
   FormLabel,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import { ArrowBackIcon, CheckIcon, DeleteIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
@@ -30,6 +31,7 @@ export const MutiraoCreate = () => {
 
   const validateSchema = yup.object().shape({
     nome: yup.string().required("campo obrigatorio!"),
+    descricao: yup.string().required("campo obrigatorio!"),
     objetivos: yup.string().required("campo obrigatorio!"),
     responsavel: yup.string().required("campo obrigatorio!"),
     data_mutirao: yup.date().required("Campo obrigatório"),
@@ -40,6 +42,7 @@ export const MutiraoCreate = () => {
 
   const initialValues = {
     nome: "",
+    descricao: "",
     objetivos: "",
     responsavel: "",
     timestamp: "" + Date.now() + "",
@@ -173,15 +176,27 @@ export const MutiraoCreate = () => {
                     justifyContent="flex-start"
                     alignItems="flex-start"
                     flexDirection="column"
-                    w="full"
+                    w="full" pe="5"
                   >
                     <FormField name="nome" label="Nome do Mutirão" isRequired />
-                    <FormField
-                      name="objetivos"
-                      label="Objetivos"
-                      type="textarea"
-                      isRequired
-                    />
+                    <Flex w="100%" wrap={["wrap","wrap","nowrap"]}>
+                      <Flex me={["0","5"]} w={["100%","100%","50%"]}>
+                        <FormField
+                          name="descricao"
+                          label="Descricao"
+                          type="textarea"
+                          isRequired
+                        />
+                      </Flex>
+                      <Flex w={["100%","100%","50%"]}>
+                        <FormField
+                          name="objetivos"
+                          label="Objetivos"
+                          type="textarea"
+                          isRequired
+                        />
+                      </Flex>
+                    </Flex>
                     <Flex w="100%">
                       <Flex me="5" w="60%">
                         <FormField

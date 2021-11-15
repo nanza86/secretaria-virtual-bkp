@@ -1,6 +1,7 @@
 import { ChakraProvider, Flex, HStack, VStack } from "@chakra-ui/react";
 import { theme } from "../src/styles/tema";
 import type { AppProps } from "next/app";
+import Error from "next/error";
 import Router from "next/router";
 import NProgress from "nprogress";
 import { Global, css } from "@emotion/react";
@@ -31,6 +32,14 @@ Router.events.on("routeChangeError", (url) => {
 });
 
 function SecretariaVirtual({ Component, pageProps }: AppProps) {
+  if (pageProps.error) {
+    return (
+      <Error
+        statusCode={pageProps.error.statusCode}
+        title={pageProps.error.message}
+      />
+    );
+  }
   return (
     <ChakraProvider theme={theme}>
       <Global styles={GlobalStyles} />

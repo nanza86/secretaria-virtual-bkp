@@ -4,12 +4,7 @@ import {
   Flex,
   Box,
   Button,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
+  SimpleGrid,
   Avatar,
   AvatarGroup,
   Tag,
@@ -24,6 +19,7 @@ import { MobileMenu } from "../../../../components/utils/mobileMenu";
 import { Motion, ItemMotion } from "../../../../components/utils/motion";
 import { format, parseISO, isAfter } from "date-fns";
 import { useRouter } from "next/router";
+import { CardMutirao } from "../../../../components/cards";
 
 export const MutiroesList = (props: any) => {
   const listaMutiroes = props.lista;
@@ -111,85 +107,33 @@ export const MutiroesList = (props: any) => {
               </Flex>
             </HStack>
             <Divider my="4" />
-            <Flex w="full" overflowX="auto">
-              <Table w="full" variant="striped" colorScheme="gray">
-                <Thead>
-                  <Tr>
-                    <Th w="1">Data</Th>
-                    <Th>Objetivo</Th>
-                    <Th display={["none", "none", "none", "table-cell"]}>
-                      Responsável
-                    </Th>
-                    <Th w="1" display={["none", "none", "none", "table-cell"]}>
-                      Participantes
-                    </Th>
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  {listaMutiroes.map((item: any, key: number) => {
-                    const mutiraoAntigo = isAfter(
-                      parseISO(item.data_mutirao),
-                      new Date()
-                    );
-                    return (
-                      <Tr
-                        key={key}
-                        onClick={() =>
-                          handleClick("/zeladoria/mutiroes/" + item.id)
-                        }
-                        cursor="pointer"
-                        _hover={{ color: "teal" }}
-                      >
-                        <Td>
-                          <Tag
-                            size="md"
-                            borderRadius="full"
-                            variant="solid"
-                            bgColor={mutiraoAntigo ? "teal.400" : "gray"}
-                          >
-                            {format(parseISO(item.data_mutirao), "dd/MM/yy")}
-                          </Tag>
-                        </Td>
-                        <Td whiteSpace="nowrap">
-                          {item.concluido && <CheckCircleIcon me="2" color="teal.300" />}
-                          {item.nome}
-                          </Td>
-                        <Td
-                          whiteSpace="nowrap"
-                          display={["none", "none", "none", "table-cell"]}
-                        >
-                          {item.responsavel}
-                        </Td>
-                        <Td display={["none", "none", "none", "table-cell"]}>
-                          <AvatarGroup size="sm" max={3}>
-                            <Avatar
-                              name="Ryan Florence"
-                              src="https://bit.ly/ryan-florence"
-                            />
-                            <Avatar
-                              name="Segun Adebayo"
-                              src="https://bit.ly/sage-adebayo"
-                            />
-                            <Avatar
-                              name="Kent Dodds"
-                              src="https://bit.ly/kent-c-dodds"
-                            />
-                            <Avatar
-                              name="Prosper Otemuyiwa"
-                              src="https://bit.ly/prosper-baba"
-                            />
-                            <Avatar
-                              name="Christian Nwamba"
-                              src="https://bit.ly/code-beast"
-                            />
-                          </AvatarGroup>
-                        </Td>
-                      </Tr>
-                    );
-                  })}
-                </Tbody>
-              </Table>
-            </Flex>
+            <SimpleGrid minChildWidth="250px" spacing="20px">
+              {listaMutiroes.map((item: any, key: number) => {
+                const mutiraoAntigo = isAfter(
+                  parseISO(item.data_mutirao),
+                  new Date()
+                );
+                return (
+                  <Flex
+                    key={key}
+                    onClick={() =>
+                      handleClick("/zeladoria/mutiroes/" + item.id)
+                    }
+                    cursor="pointer"
+                    _hover={{ background: "white" }}
+                  >
+                    <CardMutirao
+                      concluido={item.concluido}
+                      nome={item.nome}
+                      descricao={item.descricao}
+                      data={format(parseISO(item.data_mutirao), "dd/MM/yy")}
+                      antigo={mutiraoAntigo}
+                      responsavel={item.responsavel}
+                    />
+                  </Flex>
+                );
+              })}
+            </SimpleGrid>
           </Box>
         </HStack>
       </Motion>
