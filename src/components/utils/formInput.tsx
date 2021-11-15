@@ -101,7 +101,7 @@ const FormField = (props: any) => {
                     )}
                   </FormLabel>
                 )}
-                <Switch id={name} name={name} {...rest} {...field} />
+                <Switch colorScheme="green" id={name} name={name} {...rest} {...field} />
               </FormControl>
             );
           }}
