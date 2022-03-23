@@ -4,7 +4,7 @@
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["mongoDb"]
-  binaryTargets = ["native"]
+  binaryTargets   = ["native"]
 }
 
 datasource db {
@@ -13,8 +13,22 @@ datasource db {
 }
 
 model Mutirao {
-  id            String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
   nome          String
+  descricao     String
+  objetivos     String
+  responsavel   String
+  timestamp     String
+  data_mutirao  String
+  requisitos    String
+  local         String
+  participantes String
+  concluido     Boolean
+}
+
+model FardadosAtivos {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  nome_completo String
   descricao     String
   objetivos     String
   responsavel   String
