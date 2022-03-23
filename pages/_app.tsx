@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+import { ChakraProvider } from "@chakra-ui/react";
+import type { AppProps } from "next/app";
+import "../src/styles/globals.css";
+import { theme } from "../src/styles/tema";
+import "focus-visible/dist/focus-visible";
+import { Global, css } from "@emotion/react";
+=======
 import { ChakraProvider, Flex, HStack, VStack } from "@chakra-ui/react";
 import { theme } from "../src/styles/tema";
 import type { AppProps } from "next/app";
@@ -10,6 +18,7 @@ import { Logo } from "../src/components/utils/logo";
 import { MainMenu } from "../src/layout/sidebar/accordionMenu";
 import "focus-visible/dist/focus-visible";
 import "../src/styles/globals.css";
+>>>>>>> main
 const GlobalStyles = css`
   /*
     This will hide the focus indicator if the element receives focus    via the mouse,
@@ -21,6 +30,17 @@ const GlobalStyles = css`
   }
 `;
 
+<<<<<<< HEAD
+function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <ChakraProvider theme={theme}>
+      <Global styles={GlobalStyles} />
+      <Component {...pageProps} />
+    </ChakraProvider>
+  );
+}
+export default MyApp;
+=======
 Router.events.on("routeChangeStart", (url) => {
   NProgress.start();
 });
@@ -69,3 +89,4 @@ function SecretariaVirtual({ Component, pageProps }: AppProps) {
   );
 }
 export default SecretariaVirtual;
+>>>>>>> main
