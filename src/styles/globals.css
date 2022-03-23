@@ -14,8 +14,6 @@ a {
 * {
   box-sizing: border-box;
 }
-<<<<<<< HEAD
-=======
 
 #nprogress {
   pointer-events: none;
@@ -162,4 +160,3 @@ form{
 .react-datepicker__day--outside-month{
   color: hsl(0,0%,80%);
 }
->>>>>>> main
