@@ -7,18 +7,20 @@ export const Logo = () => {
   const router = useRouter();
   const handleLogo = () => {
     router.push("/");
-  }
+  };
   return (
-    <HStack alignItems="flex-end" pb="5" w="full" cursor="pointer" onClick={handleLogo}>
+    <HStack
+      alignItems="flex-end"
+      pb="5"
+      w="full"
+      cursor="pointer"
+      onClick={handleLogo}
+    >
       <IconBox color="white" bg="teal.300" p="2">
         <RiHomeSmileLine size="30" />
       </IconBox>
-      <VStack alignItems="flex-start">
-          flexWrap="nowrap"
-          whiteSpace="nowrap"
-        >
-          Secretaria Virtual
-        </Heading>
+      <VStack alignItems="flex-start" flexWrap="nowrap" whiteSpace="nowrap">
+        <Heading>Secretaria Virtual</Heading>
         <Text mt="-4px !important" p="0" fontSize="0.9em" color="gray.500">
           Flor de Jagube
         </Text>
