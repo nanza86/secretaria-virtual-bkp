@@ -5,9 +5,13 @@ import { MutiroesList } from "../../../src/layout/content/zeladoria/mutirao/list
 import { prisma } from "../../../src/database/prisma";
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const listaMutiroes = await prisma.mutirao.findMany();
+  const listaMutiroes = await prisma.mutirao.findMany({
+    orderBy: {
+      data_mutirao: 'desc',
+    },  
+  });
   return {
-    props: { listaMutiroes }
+    props: { listaMutiroes },
   };
 };
 
