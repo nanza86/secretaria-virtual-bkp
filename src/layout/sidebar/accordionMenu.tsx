@@ -115,7 +115,7 @@ export const MainMenu = () => {
             bgColor="white"
             justifyContent="flex-start"
           >
-            Fardados
+            Fardados Ativos
           </Button>
           <Button
             w="full"
@@ -124,7 +124,7 @@ export const MainMenu = () => {
             bgColor="white"
             justifyContent="flex-start"
           >
-            Visitantes
+            Amigos
           </Button>
           <Button
             w="full"
